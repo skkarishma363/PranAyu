@@ -1,0 +1,279 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e4f9e5;
+}
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #d8f7da;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+/* Logo */
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+/* Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #2e7d32;
+}
+/* Hamburger icon */
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: white;
+    flex-direction: column;
+    width: 200px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: none;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    background: #f4f8f4;
+    border: 1px solid #c8e6c9;
+    border-radius: 28px;
+    padding: 6px 8px;
+    width: 520px;
+    max-width: 90%;
+    margin: 40px auto;
+    margin-top: 20px;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    padding: 10px;
+    color: #2e7d32;
+}
+
+.search-input::placeholder {
+    color: #81c784;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2e7d32;
+}
+
+.icon-btn:hover {
+    background: rgba(46, 125, 50, 0.1);
+    border-radius: 50%;
+}
+
+.send-btn {
+    background: #2e7d32;
+    color: white;
+    font-size: 18px;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+}
+
+.send-btn:hover {
+    background: #1b5e20;
+}
+
+/* Style the dropdown button */
+.dropbtn {
+  color: rgb(15, 15, 15);
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block; /* Allows other elements to sit next to it */
+}
+
+/* Dropdown content (Hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute; /* Positions content relative to the parent dropdown container */
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1; /* Ensures the menu appears on top of other content */
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: rgb(1, 39, 10);
+  padding: 12px;
+  text-decoration: none;
+  display: block; /* Makes each link take up its own line */
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #6cf48a;
+}
+
+/* Show the dropdown menu on hover over the parent container */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+.hero-text {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 25px;
+    padding: 0 20px;
+}
+
+.hero-text h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #015f05;   /* PranAyu green */
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    font-size: 16px;
+    color: #4f6f52;
+    margin-bottom: 20px;
+}
+
+.hero-text .secondary {
+    margin-top: 100px;
+    font-size: 24px;
+    color: #04b920;
+}
+/* Initial hidden state */
+.hero-text {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 25px;
+    padding: 0 20px;
+}
+
+/* Welcome text */
+.welcome-text {
+    font-size: 32px;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+/* Individual letters */
+.welcome-text span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: letterFade 0.6s ease forwards;
+}
+
+/* Delay for each letter */
+.welcome-text span:nth-child(1) { animation-delay: 0.1s; }
+.welcome-text span:nth-child(2) { animation-delay: 0.15s; }
+.welcome-text span:nth-child(3) { animation-delay: 0.2s; }
+.welcome-text span:nth-child(4) { animation-delay: 0.25s; }
+.welcome-text span:nth-child(5) { animation-delay: 0.3s; }
+.welcome-text span:nth-child(6) { animation-delay: 0.35s; }
+.welcome-text span:nth-child(7) { animation-delay: 0.4s; }
+.welcome-text span:nth-child(8) { animation-delay: 0.45s; }
+.welcome-text span:nth-child(9) { animation-delay: 0.5s; }
+.welcome-text span:nth-child(10){ animation-delay: 0.55s; }
+.welcome-text span:nth-child(11){ animation-delay: 0.6s; }
+.welcome-text span:nth-child(12){ animation-delay: 0.65s; }
+.welcome-text span:nth-child(13){ animation-delay: 0.7s; }
+.welcome-text span:nth-child(14){ animation-delay: 0.75s; }
+.welcome-text span:nth-child(15){ animation-delay: 0.8s; }
+.welcome-text span:nth-child(16){ animation-delay: 0.85s; }
+.welcome-text span:nth-child(17){ animation-delay: 0.9s; }
+.welcome-text span:nth-child(18){ animation-delay: 0.95s; }
+
+/* Fade animation */
+@keyframes letterFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Other hero text */
+.Hfade-text {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeUp 0.8s ease forwards;
+    animation-delay: 0.9s;
+    color: #4f6f52;
+}
+.fade-text {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeUp 0.8s ease forwards;
+    animation-delay: 1.8s;
+    color: #4f6f52;
+}
+
+.secondary {
+    margin-top: 25px;
+    font-size: 24px;
+    color: #2e7d32;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.welcome-text span.space {
+    width: 1px;      /* controls spacing */
+    opacity: 1;
+    transform: none;
+    animation: none;
+    display: inline-block;
+}
