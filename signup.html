@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/pranAyu.css">
+    <link rel="stylesheet" href="css/signup.css">
+    
     <title>Create Account</title>
+
 </head>
 
 <body>
+     <nav class="navbar">
+                
+                 <div class="logo"><img src="leafLog.png" alt="PranAyu logo">
+                 <span>PranAyu</span>
+                 </div>
+            </nav>
     <div class="create-container">
         <h2>Create Account</h2>
+        <form action="/submit_create" method="post">
+            <label for="Full name">Full name</label><br>
+            <input type="text" id="fullname" name="fullname" placeholder="Enter your name" required><br><br>
+            <label for="username">Mobile number</label><br>
+            <input type="phone number" id="username" name="username" placeholder="Enter your Mobile Number" required><br><br>
+            <label for="Age">Age</label><br>
+            <input type="number" id="number" name="number" placeholder="Enter your age" required><br><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password" placeholder="Password must be strong" required><br><br>
+            <button type="submit">Create Account</button>
+            <br><br>
         <form id="createForm">
             <input type="text" id="fullname" name="fullname" placeholder="Full Name" required><br><br>
             <input type="number" id="username" name="username" placeholder="Mobile Number" required><br><br>
@@ -60,3 +79,4 @@
 </script>
 </body>
 </html>
+
