@@ -1,6 +1,6 @@
 
 function goToLogin() {
-    window.location.href = "home.html";
+    window.location.href = "index.html";
 }
 function toggleMenu() {
     document.getElementById("navLinks").classList.toggle("show");
