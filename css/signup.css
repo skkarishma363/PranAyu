@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+}
+
+body {
+    height: 100vh;
+    background-color: #e1f8dc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+}
+.navbar {
+    position: absolute;
+    top: 35px;
+    left: 70px;
+    background: transparent;   /* important */
+}
+.logo {
+    display: flex;
+    align-items: top-left-allign;
+    gap: 12px;
+    background: transparent;   /* removes grey box */
+}
+
+.logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+}
+.logo span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 1000;
+    color: #2f6f3e;
+    letter-spacing: 1px;
+}
+.create-container {
+    width: 300px;
+    text-align: center;
+}
+/* Heading */
+.create-container h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 500;
+    color: #2f5e3a;
+    margin-bottom: 35px;
+}
+.create-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0px;  /* tighter */
+    color: #2f5e3a;
+    font-size: 15px;
+}
+/* Inputs */
+.create-container input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background-color: #c8dec1;
+    font-size: 14px;
+    margin-bottom: 0px; /* reduced spacing */
+    color: #2f5e3a;
+    transition: 0.2s ease;
+}
+.login-container input:focus {
+    background-color: #d4dfd2;
+}
+
+.create-container button[type="submit"]:hover {
+    background-color: #245730;
+}
+.create-container p,
+.create-container label[for="create"] {
+    font-size: 14px;
+    color: #2f5e3a;
+    margin-bottom: 10px;
+}
+.create-container button {
+    width: 100%;                 /* full width */
+    padding: 10px 0;             /* height */
+    border-radius: 30px;         /* pill shape */
+    border: none;                /* remove border */
+    background-color: #2f6f3e;   /* green */
+    color: white;                /* white text */
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+
