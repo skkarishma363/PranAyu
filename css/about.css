@@ -1,0 +1,78 @@
+/* Page Background */
+body {
+    margin: 0;
+    background-color: #cfe3cf;
+    height: 100vh;        /* full screen height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;     /* removes scroll */
+}
+.navbar {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    background: transparent;   /* important */
+}
+
+/* Logo Section */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 40px;
+    color: #2f6f3e;
+}
+
+/* About Box */
+.about-container {
+    width: 60%;
+    margin: 0;
+    padding: 10px;
+    background-color: #e8f3e8;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.about-container h2 {
+    color: #2f6f3e;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.about-container p {
+    color: #2f6f3e;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+.about-container h3 {
+    color: #2f6f3e;
+    margin-bottom: 20px;
+    font-size: automatic;
+}
+.about-container h4 {
+    color: #2f6f3e;
+    margin-bottom: 20px;
+    font-size: automatic;
+}
+.feature-box {
+    display: flex;
+    
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.feature {
+    width: 30%;
+    background: #dceedd;
+    padding: 20px;
+    border-radius: 20px;
+    transition:0.3s ease;
+}
+.feature:hover{
+     transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
