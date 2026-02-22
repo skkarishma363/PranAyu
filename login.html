@@ -2,81 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
     <title>Account Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/login.css">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    
-
-
 </head>
+
 <body>
-<<<<<<< HEAD
 
-=======
-            <nav class="navbar">
-                
-                 <div class="logo"><img src="leafLog.png" alt="PranAyu logo">
-                 <span>PranAyu</span>
-                 </div>
-            </nav>
->>>>>>> c31e918e24488f6b67dab8e524e4ef2f72f6d242
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="leafLog.png" alt="PranAyu logo">
+            <span>PranAyu</span>
+        </div>
+    </nav>
+
+    <!-- Login Container -->
     <div class="login-container">
-        
         <h2>Login</h2>
-<<<<<<< HEAD
-        <form id="loginForm">
-            <label>User name or Mobile Number</label><br>
-            <input type="number" id="username" placeholder="Mobile Number" required><br><br>
 
-            <label>Password</label><br>
-            <input type="password" id="password" placeholder="Password" required><br><br>
+        <form id="loginForm">
+            <label for="username">Email or Mobile Number</label><br>
+            <input type="email" id="username" placeholder="Enter Email" required><br><br>
+
+            <label for="password">Password</label><br>
+            <input type="password" id="password" placeholder="Enter Password" required><br><br>
 
             <button type="submit">Login</button>
-=======
-        <form action="/submit_login" method="post">
-            <label for="username">Username or Mobile Number</label><br>
-            <input type="mobile number" id="username" name="username" placeholder="Mobile Number" required><br><br>
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" placeholder="Password" required><br><br>
-            <button onclick="window.location.href='home.html'" type="submit">Login</button>
-            <br><br>
->>>>>>> c31e918e24488f6b67dab8e524e4ef2f72f6d242
         </form>
 
         <br><br>
-        <button onclick="window.location.href='signup.html'" type="button">Create</button>
+
+        <button onclick="window.location.href='signup.html'" type="button">
+            Create Account
+        </button>
     </div>
 
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Your Supabase Config -->
+    <!-- Supabase Login Script -->
     <script>
         const supabase = window.supabase.createClient(
             "https://ugqoldpuacpigsimycvm.supabase.co",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVncW9sZHB1YWNwaWdzaW15Y3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NDE4ODksImV4cCI6MjA4NzMxNzg4OX0.vnNS8ai-xuCO_4nMVg5TLADreD3BphVXd-mE9_A_ka4"
+            "YOUR_PUBLIC_ANON_KEY"
         );
 
         document.getElementById("loginForm").addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            const username = document.getElementById("username").value;
+            const email = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
             const { data, error } = await supabase.auth.signInWithPassword({
-                email: username,
+                email: email,
                 password: password,
             });
 
             if (error) {
-                alert(error.message);
+                alert("Login Failed: " + error.message);
             } else {
+                alert("Login Successful!");
                 window.location.href = "home.html";
             }
         });
     </script>
 
 </body>
-
 </html>
