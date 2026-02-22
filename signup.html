@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>Create Account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="css/signup.css">
 </head>
 
@@ -24,78 +22,92 @@
         <h2>Create Account</h2>
 
         <form id="createForm">
-            <label for="fullname">Full Name</label><br>
-            <input type="text" id="fullname" placeholder="Enter your name" required><br><br>
+            <label>Full Name</label><br>
+            <input type="text" id="fullname" required><br><br>
 
-            <label for="phone">Mobile Number</label><br>
-            <input type="tel" id="phone" placeholder="Enter your mobile number" required><br><br>
+            <label>Mobile Number</label><br>
+            <input type="tel" id="phone" required><br><br>
 
-            <label for="age">Age</label><br>
-            <input type="number" id="age" placeholder="Enter your age" required><br><br>
+            <label>Age</label><br>
+            <input type="number" id="age" required><br><br>
 
-            <label for="password">Password</label><br>
-            <input type="password" id="password" placeholder="Password must be strong" required><br><br>
+            <label>Password</label><br>
+            <input type="password" id="password" required><br><br>
 
-            <button type="submit">Create Account</button>
+            <button type="submit" id="signupBtn">Create Account</button>
         </form>
 
-        <br><br>
+        <br>
         <button onclick="window.location.href='login.html'" type="button">
             Already have an account? Login
         </button>
+
+        <p id="message" style="color:red;"></p>
     </div>
 
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Signup Script -->
     <script>
         const supabase = window.supabase.createClient(
             "https://ugqoldpuacpigsimycvm.supabase.co",
-            "YOUR_PUBLIC_ANON_KEY"
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVncW9sZHB1YWNwaWdzaW15Y3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NDE4ODksImV4cCI6MjA4NzMxNzg4OX0.vnNS8ai-xuCO_4nMVg5TLADreD3BphVXd-mE9_A_ka4"
         );
 
         const form = document.getElementById("createForm");
+        const message = document.getElementById("message");
+        const signupBtn = document.getElementById("signupBtn");
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            const fullName = document.getElementById("fullname").value;
-            const phone = document.getElementById("phone").value;
-            const age = document.getElementById("age").value;
+            message.textContent = "";
+            signupBtn.disabled = true;
+            signupBtn.textContent = "Creating...";
+
+            const fullName = document.getElementById("fullname").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const age = document.getElementById("age").value.trim();
             const password = document.getElementById("password").value;
 
-            // Create Auth User (temporary email format)
-            const { data, error } = await supabase.auth.signUp({
-                email: phone + "@pranayu.com",
-                password: password,
-            });
+            try {
+                // Create Auth User
+                const { data, error } = await supabase.auth.signUp({
+                    email: phone + "@pranayu.com",
+                    password: password
+                });
 
-            if (error) {
-                alert("Signup Failed: " + error.message);
-                return;
+                if (error) throw error;
+
+                if (!data.user) {
+                    message.textContent = "Signup failed. Please try again.";
+                    return;
+                }
+
+                // Insert into users table
+                const { error: insertError } = await supabase
+                    .from("users")
+                    .insert([
+                        {
+                            id: data.user.id,
+                            name: fullName,
+                            phone: phone,
+                            age: age,
+                            role: "user"
+                        }
+                    ]);
+
+                if (insertError) throw insertError;
+
+                alert("Account created successfully!");
+                window.location.href = "login.html";
+
+            } catch (err) {
+                message.textContent = err.message;
+            } finally {
+                signupBtn.disabled = false;
+                signupBtn.textContent = "Create Account";
             }
-
-            // Insert into users table
-            const { error: insertError } = await supabase
-                .from("users")
-                .insert([
-                    {
-                        id: data.user.id,
-                        name: fullName,
-                        phone: phone,
-                        age: age,
-                        role: "user",
-                    },
-                ]);
-
-            if (insertError) {
-                alert("Database Error: " + insertError.message);
-                return;
-            }
-
-            alert("Account created successfully!");
-            window.location.href = "login.html";
         });
     </script>
 
