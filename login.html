@@ -27,13 +27,13 @@
         <h2>Login</h2>
 
         <form id="loginForm">
-            <label for="username">Email or Mobile Number</label><br>
-            <input type="email" id="username" placeholder="Enter Email" required><br><br>
+            <label>Email</label><br>
+            <input type="tel" id="email" placeholder="Enter Registered Email" required><br><br>
 
             <label for="password">Password</label><br>
             <input type="password" id="password" placeholder="Enter Password" required><br><br>
 
-            <button type="submit">Login</button>
+            <button type="submit" id="loginBtn">Login</button>
         </form>
 
         <br><br>
@@ -41,35 +41,51 @@
         <button onclick="window.location.href='signup.html'" type="button">
             Create Account
         </button>
+
+        <p id="message" style="color:red;"></p>
     </div>
 
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Supabase Login Script -->
     <script>
-        const supabase = window.supabase.createClient(
-            "https://ugqoldpuacpigsimycvm.supabase.co",
-            "YOUR_PUBLIC_ANON_KEY"
-        );
+        document.addEventListener("DOMContentLoaded", () => {
 
-        document.getElementById("loginForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
+            const supabase = window.supabase.createClient(
+                "https://ugqoldpuacpigsimycvm.supabase.co",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVncW9sZHB1YWNwaWdzaW15Y3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NDE4ODksImV4cCI6MjA4NzMxNzg4OX0.vnNS8ai-xuCO_4nMVg5TLADreD3BphVXd-mE9_A_ka4"
+            );
 
-            const email = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+            const form = document.getElementById("loginForm");
+            const message = document.getElementById("message");
+            const loginBtn = document.getElementById("loginBtn");
 
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password,
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                message.textContent = "";
+                loginBtn.disabled = true;
+                loginBtn.textContent = "Logging in...";
+
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value;
+
+                const { error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password,
+                });
+
+                if (error) {
+                    message.textContent = error.message;
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = "Login";
+                    return;
+                }
+
+                // Redirect ONLY after successful login
+                window.location.href = "home.html";
             });
 
-            if (error) {
-                alert("Login Failed: " + error.message);
-            } else {
-                alert("Login Successful!");
-                window.location.href = "home.html";
-            }
         });
     </script>
 
