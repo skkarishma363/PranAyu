@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - PranAyu</title>
+  <link rel="stylesheet" href="css/profile.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Top Brand -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="leafLog.png" alt="PranAyu logo">
+      <span>PranAyu</span>
+    </div>
+  </nav>
+
+  <!-- Main Layout -->
+  <div class="layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="side-profile">
+        <div class="avatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <h3 id="sideName">Your Name</h3>
+        <p id="sidePhone">+91 XXXXXXXXXX</p>
+      </div>
+
+      <div class="side-menu">
+        <button class="menu-btn active" onclick="showSection('personal')">
+          <i class="fa-regular fa-id-badge"></i> Personal Details
+        </button>
+
+        <button class="menu-btn" onclick="showSection('health')">
+          <i class="fa-solid fa-heart-pulse"></i> Health Details
+        </button>
+
+        <button class="menu-btn" onclick="window.location.href='home.html'">
+          <i class="fa-solid fa-house"></i> Home
+        </button>
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <main class="content">
+
+      <!-- PERSONAL DETAILS (TOP) -->
+      <section id="personal" class="section show">
+        <h2>Personal Details</h2>
+
+        <div class="cards">
+          <div class="card">
+            <p class="label">Full Name</p>
+            <p class="value" id="detailName">—</p>
+          </div>
+
+          <div class="card">
+            <p class="label">Mobile Number</p>
+            <p class="value" id="detailPhone">—</p>
+          </div>
+
+          <div class="card">
+            <p class="label">Age</p>
+            <p class="value" id="detailAge">—</p>
+          </div>
+
+          <div class="card">
+            <p class="label">Account Type</p>
+            <p class="value" id="detailRole">—</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- HEALTH DETAILS (BELOW SECTION) -->
+      <section id="health" class="section">
+        <h2>Health Details</h2>
+
+        <div class="cards">
+          <div class="card">
+            <p class="label">Blood Group</p>
+            <p class="value" id="bloodGroup">—</p>
+          </div>
+
+          <div class="card">
+            <p class="label">Allergies</p>
+            <p class="value" id="allergies">—</p>
+          </div>
+
+          <div class="card">
+            <p class="label">Existing Conditions</p>
+            <p class="value" id="conditions">—</p>
+          </div>
+
+          <div class="card">
+            <p class="label">Emergency Contact</p>
+            <p class="value" id="emergency">—</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("show"));
+      document.getElementById(sectionId).classList.add("show");
+
+      document.querySelectorAll(".menu-btn").forEach(b => b.classList.remove("active"));
+      if(sectionId === "personal") document.querySelectorAll(".menu-btn")[0].classList.add("active");
+      if(sectionId === "health") document.querySelectorAll(".menu-btn")[1].classList.add("active");
+    }
+
+    // Demo fill (replace later with Supabase values)
+    document.getElementById("sideName").textContent = "PranAyu User";
+    document.getElementById("sidePhone").textContent = "+91 9876543210";
+    document.getElementById("detailName").textContent = "PranAyu User";
+    document.getElementById("detailPhone").textContent = "9876543210";
+    document.getElementById("detailAge").textContent = "21";
+    document.getElementById("detailRole").textContent = "User";
+
+    document.getElementById("bloodGroup").textContent = "O+";
+    document.getElementById("allergies").textContent = "None";
+    document.getElementById("conditions").textContent = "None";
+    document.getElementById("emergency").textContent = "9876500000";
+  </script>
+
+</body>
+</html>

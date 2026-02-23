@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - PranAyu</title>
+
+  <link rel="stylesheet" href="css/userdata.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Brand -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="leafLog.png" alt="PranAyu logo">
+      <span>PranAyu</span>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar"><i class="fa-solid fa-user"></i></div>
+        <div>
+          <h2>My Profile</h2>
+          <p class="sub">Update your personal & health details</p>
+        </div>
+      </div>
+
+      <form id="profileForm">
+        <!-- PERSONAL DETAILS -->
+        <h3 class="section-title">Personal Details</h3>
+
+        <div class="grid">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" placeholder="Enter your full name" required />
+          </div>
+
+          <div class="field">
+            <label for="phone">Mobile Number</label>
+            <input id="phone" type="tel" placeholder="10-digit number"
+                   maxlength="10"
+                   pattern="[0-9]{10}"
+                   oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                   required />
+          </div>
+
+          <div class="field">
+            <label for="age">Age</label>
+            <input id="age" type="number" placeholder="Enter your age" min="1" max="120" required />
+          </div>
+        </div>
+
+        <!-- HEALTH DETAILS -->
+        <h3 class="section-title">Health Details</h3>
+
+        <div class="grid">
+          <div class="field">
+            <label for="blood_group">Blood Group</label>
+            <input id="blood_group" type="text" placeholder="Eg: O+ / A+ / B-" />
+          </div>
+
+          <div class="field">
+            <label for="allergies">Allergies</label>
+            <input id="allergies" type="text" placeholder="Eg: Dust / Pollen / None" />
+          </div>
+
+          <div class="field full">
+            <label for="conditions">Existing Conditions</label>
+            <input id="conditions" type="text"
+                   placeholder="Eg: Sugar, BP, Thyroid, Heart Stroke / None" />
+          </div>
+
+          <div class="field">
+            <label for="emergency_contact">Emergency Contact</label>
+            <input id="emergency_contact" type="tel" placeholder="10-digit number"
+                   maxlength="10"
+                   pattern="[0-9]{10}"
+                   oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn light" id="btnHome">Home</button>
+          <button type="submit" class="btn">Save</button>
+        </div>
+
+        <p class="status" id="statusMsg"></p>
+      </form>
+    </div>
+  </div>
+
+   <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+    const supabaseUrl = "https://ugqoldpuacpigsimycvm.supabase.co";
+    const supabaseKey = "PASTE_YOUR_ANON_KEY_HERE";
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const $ = (id) => document.getElementById(id);
+    const statusMsg = $("statusMsg");
+
+    $("btnHome").addEventListener("click", () => {
+      window.location.href = "home.html";
+    });
+
+    function setStatus(msg, ok = true) {
+      statusMsg.textContent = msg;
+      statusMsg.className = "status " + (ok ? "ok" : "bad");
+    }
+
+    async function getSessionUser() {
+      const { data: { user } } = await supabase.auth.getUser();
+      return user;
+    }
+
+    async function loadProfile() {
+      const user = await getSessionUser();
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      // Load existing profile data
+      const { data, error } = await supabase
+        .from("users")
+        .select("name, phone, age, blood_group, allergies, conditions, emergency_contact, role")
+        .eq("id", user.id)
+        .single();
+
+      if (error) {
+        // If row not found, user can still fill and save
+        console.log("Load profile:", error.message);
+        return;
+      }
+
+      $("name").value = data?.name ?? "";
+      $("phone").value = data?.phone ?? "";
+      $("age").value = data?.age ?? "";
+      $("blood_group").value = data?.blood_group ?? "";
+      $("allergies").value = data?.allergies ?? "";
+      $("conditions").value = data?.conditions ?? "";
+      $("emergency_contact").value = data?.emergency_contact ?? "";
+    }
+
+    $("profileForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const user = await getSessionUser();
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const payload = {
+        id: user.id,
+        name: $("name").value.trim(),
+        phone: $("phone").value.trim(),
+        age: $("age").value ? Number($("age").value) : null,
+        blood_group: $("blood_group").value.trim() || null,
+        allergies: $("allergies").value.trim() || null,
+        conditions: $("conditions").value.trim() || null,
+        emergency_contact: $("emergency_contact").value.trim() || null,
+        role: "user"
+      };
+
+      if (!/^\d{10}$/.test(payload.phone)) {
+        setStatus("Mobile number must be exactly 10 digits.", false);
+        return;
+      }
+
+      if (payload.emergency_contact && !/^\d{10}$/.test(payload.emergency_contact)) {
+        setStatus("Emergency contact must be exactly 10 digits.", false);
+        return;
+      }
+
+      // Upsert = insert if not exists, otherwise update
+      const { error } = await supabase
+        .from("users")
+        .upsert(payload, { onConflict: "id" });
+
+      if (error) {
+        setStatus("Save failed: " + error.message, false);
+        return;
+      }
+
+      setStatus("Saved successfully ✅");
+    });
+
+    loadProfile();
+  </script> 
+</body>
+</html>

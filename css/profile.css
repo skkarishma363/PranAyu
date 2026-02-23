@@ -1,0 +1,163 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Georgia', serif;
+}
+
+body{
+  background:#e1f8dc;
+  min-height:100vh;
+}
+
+/* Top Brand */
+.navbar{
+  padding:28px 60px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo img{ height:48px; }
+
+.logo span{
+  font-size:34px;
+  font-weight:1000;
+  color:#2f6f3e;
+  letter-spacing:1px;
+}
+
+/* Layout */
+.layout{
+  width: 85%;
+  margin: 10px auto 40px auto;
+  display:flex;
+  gap:24px;
+  align-items:flex-start;
+}
+
+/* Sidebar */
+.sidebar{
+  width: 280px;
+  background:#a2d393;
+  border-radius: 28px;
+  padding: 22px;
+}
+
+.side-profile{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding: 10px 0 18px 0;
+  border-bottom: 2px solid rgba(47,111,62,0.25);
+  margin-bottom: 14px;
+}
+
+.avatar{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  background:#2f6f3e;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom: 10px;
+}
+
+.avatar i{
+  color:#fff;
+  font-size:30px;
+}
+
+.side-profile h3{
+  color:#2f5e3a;
+  font-size:18px;
+  margin-bottom:4px;
+}
+
+.side-profile p{
+  color:#2f5e3a;
+  font-size:14px;
+}
+
+.side-menu{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.menu-btn{
+  width:100%;
+  border:none;
+  border-radius: 18px;
+  padding: 12px 14px;
+  background:#cde9c5;
+  color:#2f5e3a;
+  font-size:14px;
+  cursor:pointer;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  transition:0.2s ease;
+}
+
+.menu-btn i{ font-size:16px; }
+
+.menu-btn:hover{
+  background:#bfe2b6;
+}
+
+.menu-btn.active{
+  background:#2f6f3e;
+  color:white;
+}
+
+/* Content */
+.content{
+  flex:1;
+}
+
+.section{
+  display:none;
+}
+
+.section.show{
+  display:block;
+}
+
+.section h2{
+  color:#2f5e3a;
+  font-size:26px;
+  font-weight:500;
+  margin: 10px 0 18px 0;
+}
+
+/* Cards */
+.cards{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card{
+  background:#cde9c5;
+  border-radius: 22px;
+  padding: 18px 18px;
+}
+
+.label{
+  color:#2f5e3a;
+  opacity:0.8;
+  font-size:13px;
+  margin-bottom: 6px;
+}
+
+.value{
+  color:#2f5e3a;
+  font-size:16px;
+  font-weight:600;
+}

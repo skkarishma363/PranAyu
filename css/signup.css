@@ -64,18 +64,17 @@ body {
     border-radius: 25px;
     border: none;
     outline: none;
-    background-color: #c8dec1;
+    background-color: #d0ebc8;
     font-size: 14px;
     margin-bottom: 0px; /* reduced spacing */
     color: #2f5e3a;
-    transition: 0.2s ease;
 }
 .login-container input:focus {
     background-color: #d4dfd2;
 }
 
-.create-container button[type="submit"]:hover {
-    background-color: #245730;
+.create-container button:hover {
+    background-color: #7dbd8c;
 }
 .create-container p,
 .create-container label[for="create"] {
@@ -88,12 +87,42 @@ body {
     padding: 10px 0;             /* height */
     border-radius: 30px;         /* pill shape */
     border: none;                /* remove border */
-    background-color: #2f6f3e;   /* green */
+    background-color: #3a7f4a;   /* green */
     color: white;                /* white text */
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
     transition: 0.3s ease;
 }
+/* Password wrapper */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding: 15px;
+    padding-right: 100px;   /* space for eye */
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background-color: #cde9c3;
+    font-size: 14px;
+    color: #2f5e3a;
+}
+
+/* Eye icon */
+.toggle-password {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #448252;
+    font-size: 16px;
+}
+
+
 
 
