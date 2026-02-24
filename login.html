@@ -33,7 +33,9 @@
 </form>
 
 <br>
-<button onclick="window.location.href='signup.html'">Create Account</button>
+<button type="button" onclick="window.location.href='signup.html'">
+    Create Account
+</button>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -43,48 +45,51 @@ const supabase = window.supabase.createClient(
     "YOUR_PUBLIC_ANON_KEY"
 );
 
-// Prevent auto login issue
-window.addEventListener("load", async () => {
-    const { data } = await supabase.auth.getSession();
-    if (data.session) {
-        await supabase.auth.signOut();
-    }
-});
-
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const phone = document.getElementById("phone").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    if (!phone || phone.length !== 10) {
-        alert("Enter valid 10-digit mobile number");
+    // Validation
+    if (phone.length !== 10) {
+        alert("Please enter a valid 10-digit mobile number.");
         return;
     }
 
     if (!password) {
-        alert("Enter password");
+        alert("Please enter password.");
         return;
     }
 
     const fakeEmail = phone + "@pranayu.com";
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email: fakeEmail,
-        password: password
-    });
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: fakeEmail,
+            password: password
+        });
 
-    if (error) {
-        alert("Login Failed: " + error.message);
-    } else {
-        alert("Login Successful");
-        window.location.href = "home.html";
+        if (error) {
+            alert("Login Failed: " + error.message);
+            return;
+        }
+
+        if (data.session) {
+            alert("Login Successful!");
+            window.location.href = "home.html";
+        }
+
+    } catch (err) {
+        alert("Something went wrong.");
+        console.error(err);
     }
 });
 </script>
 
 </body>
 </html>
+
 
 
 
