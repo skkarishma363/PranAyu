@@ -42,8 +42,16 @@
 <script>
 const supabase = window.supabase.createClient(
     "https://ugqoldpuacpigsimycvm.supabase.co",
-    "YOUR_PUBLIC_ANON_KEY"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVncW9sZHB1YWNwaWdzaW15Y3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NDE4ODksImV4cCI6MjA4NzMxNzg4OX0.vnNS8ai-xuCO_4nMVg5TLADreD3BphVXd-mE9_A_ka4"
 );
+
+// If already logged in → go to home
+window.addEventListener("load", async () => {
+    const { data } = await supabase.auth.getSession();
+    if (data.session) {
+        window.location.href = "home.html";
+    }
+});
 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -51,44 +59,36 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const phone = document.getElementById("phone").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    // Validation
-    if (phone.length !== 10) {
-        alert("Please enter a valid 10-digit mobile number.");
+    if (!phone || phone.length !== 10) {
+        alert("Enter valid 10-digit mobile number");
         return;
     }
 
     if (!password) {
-        alert("Please enter password.");
+        alert("Enter password");
         return;
     }
 
     const fakeEmail = phone + "@pranayu.com";
 
-    try {
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: fakeEmail,
-            password: password
-        });
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: fakeEmail,
+        password: password
+    });
 
-        if (error) {
-            alert("Login Failed: " + error.message);
-            return;
-        }
-
-        if (data.session) {
-            alert("Login Successful!");
-            window.location.href = "home.html";
-        }
-
-    } catch (err) {
-        alert("Something went wrong.");
-        console.error(err);
+    if (error) {
+        alert("Login Failed: " + error.message);
+        return;
     }
+
+    alert("Login Successful!");
+    window.location.href = "home.html";
 });
 </script>
 
 </body>
 </html>
+
 
 
 
