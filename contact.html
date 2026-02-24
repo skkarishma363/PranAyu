@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nearby Help</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/contact.css" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="leafLog.png" alt="PranAyu logo">
+            <span>PranAyu</span>
+        </div>
+    </nav>
+  <section class="contact-section">
+    <h2>Nearby ASHA Workers & Doctors</h2>
+
+    <div class="contact-card">
+      <p class="subtext">
+        Enter your <b>pincode</b>  to view ASHA workers and doctors in your area.
+      </p>
+
+      <div class="field">
+        <label for="pincodeInput">Pincode</label>
+        <input
+          id="pincodeInput"
+          type="tel"
+          inputmode="numeric"
+          placeholder="Enter pincode"
+          maxlength="6"
+          autocomplete="off"
+        />
+       
+      </div>
+
+      <div class="actions">
+        <button id="btnSearch" class="btn primary" disabled>🔎 Search</button>
+        <button id="btnLocation" class="btn" disabled>📍 Use My Location</button>
+      </div>
+
+      <div id="status" class="status hidden"></div>
+
+      <div class="location-box" id="locationBox" style="display:none;">
+        <div class="loc-item"><span>Latitude:</span> <b id="lat">-</b></div>
+        <div class="loc-item"><span>Longitude:</span> <b id="lng">-</b></div>
+      </div>
+
+      <div class="results hidden" id="resultsSection">
+        <h3 id="resultsTitle">Results</h3>
+        <div id="resultsList" class="results-list"></div>
+      </div>
+
+      <div class="contact-footer">
+        <p>Need help? Contact us:</p>
+        <a href="mailto:support@pranayu.in" class="contact-email">📧 support@pranayu.in</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ JS changes only (replace your current related parts with this) -->
+
+<script>
+  // ❌ Remove "allowed pincode only" restriction
+  // ✅ Only rule now: pincode must be exactly 6 digits (numbers only)
+
+  const PIN_TO_LOCATION = {
+    "534101": "Tadepalligudem",
+    "533295": "Maredumilli",
+    "533101": "Rajahmundry",
+    "533437": "Peddapuram",
+    "533001": "Kakinada",
+    "534201": "Bhimavaram",
+    "517501": "Tirupati",
+    "520001": "Vijayawada",
+    "535002": "Vizianagaram",
+    "533287": "Seethanagaram"
+  };
+
+  const DIRECTORY = {
+    "534101": [
+      { type: "ASHA", name: "S. Lakshmi", phone: "+919999000111", area: "Tadepalligudem PHC", distanceKm: 1.1 },
+      { type: "Doctor", name: "Dr. Ramesh (MBBS)", phone: "+919999000222", area: "Tadepalligudem Clinic", distanceKm: 2.4 }
+    ],
+    "533295": [
+      { type: "ASHA", name: "M. Anitha", phone: "+919999000333", area: "Maredumilli Sub-Center", distanceKm: 1.0 },
+      { type: "Doctor", name: "Dr. Priya", phone: "+919999000444", area: "Maredumilli PHC", distanceKm: 2.2 }
+    ],
+    "533101": [
+      { type: "ASHA", name: "K. Swathi", phone: "+919999000555", area: "Rajahmundry Ward Health", distanceKm: 1.6 },
+      { type: "Doctor", name: "Dr. Naveen", phone: "+919999000666", area: "Rajahmundry Hospital", distanceKm: 3.0 }
+    ],
+    "533437": [
+      { type: "ASHA", name: "P. Sandhya", phone: "+919999000777", area: "Peddapuram Health Post", distanceKm: 1.4 },
+      { type: "Doctor", name: "Dr. Suresh", phone: "+919999000888", area: "Peddapuram Clinic", distanceKm: 2.9 }
+    ],
+    "533001": [
+      { type: "ASHA", name: "D. Kavya", phone: "+919999001111", area: "Kakinada Urban PHC", distanceKm: 1.2 },
+      { type: "Doctor", name: "Dr. Arun", phone: "+919999001222", area: "Kakinada Hospital", distanceKm: 2.6 }
+    ],
+    "534201": [
+      { type: "ASHA", name: "V. Divya", phone: "+919999001333", area: "Bhimavaram PHC", distanceKm: 1.3 },
+      { type: "Doctor", name: "Dr. Keerthi", phone: "+919999001444", area: "Bhimavaram Clinic", distanceKm: 2.8 }
+    ],
+    "517501": [
+      { type: "ASHA", name: "S. Haritha", phone: "+919999001555", area: "Tirupati PHC", distanceKm: 1.0 },
+      { type: "Doctor", name: "Dr. Meena", phone: "+919999001666", area: "Tirupati Hospital", distanceKm: 2.5 }
+    ],
+    "520001": [
+      { type: "ASHA", name: "N. Sirisha", phone: "+919999001777", area: "Vijayawada PHC", distanceKm: 1.4 },
+      { type: "Doctor", name: "Dr. Varun", phone: "+919999001888", area: "Vijayawada Clinic", distanceKm: 2.7 }
+    ],
+    "535002": [
+      { type: "ASHA", name: "R. Swapna", phone: "+919999001999", area: "Vizianagaram PHC", distanceKm: 1.5 },
+      { type: "Doctor", name: "Dr. Teja", phone: "+919999002000", area: "Vizianagaram Hospital", distanceKm: 3.1 }
+    ],
+    "533287": [
+        {type: "ASHA", name: "M. Akshitha", phone: "+918639645333", area: "Seethanagaram PHC", distanceKm: 1.5 },
+        {type: "Doctor", name: "M. sunitha", phone: "+918309021470", area: "Seethanagaram Hospital", diatanceKm: 2.0}
+    ]
+  };
+
+  // Elements
+  const statusEl = document.getElementById("status");
+  const pincodeInput = document.getElementById("pincodeInput");
+  const btnSearch = document.getElementById("btnSearch");
+  const btnLocation = document.getElementById("btnLocation");
+
+  const resultsSection = document.getElementById("resultsSection");
+  const resultsList = document.getElementById("resultsList");
+  const resultsTitle = document.getElementById("resultsTitle");
+
+  const locationBox = document.getElementById("locationBox");
+  const latEl = document.getElementById("lat");
+  const lngEl = document.getElementById("lng");
+
+  function showStatus(msg) {
+    statusEl.textContent = msg;
+    statusEl.className = "status error";
+    statusEl.classList.remove("hidden");
+  }
+
+  function hideStatus() {
+    statusEl.textContent = "";
+    statusEl.className = "status hidden";
+  }
+
+  function isValidSixDigitPin(pin) {
+    return /^[1-9][0-9]{5}$/.test(pin);
+  }
+
+  // ✅ Buttons are ALWAYS usable (not disabled)
+  btnSearch.disabled = false;
+  btnLocation.disabled = false;
+
+  // ✅ Pincode input: numbers only, max 6
+  pincodeInput.addEventListener("input", () => {
+    pincodeInput.value = pincodeInput.value.replace(/\D/g, "").slice(0, 6);
+    hideStatus();
+  });
+
+  function renderResults(pin) {
+    resultsSection.classList.remove("hidden");
+    resultsList.innerHTML = "";
+
+    const locationName = PIN_TO_LOCATION[pin] || "Your Area";
+    resultsTitle.textContent = `Results for ${locationName} (${pin})`;
+
+    const items = DIRECTORY[pin] || [];
+
+    if (items.length === 0) {
+      resultsList.innerHTML = `<div class="empty">No results found.</div>`;
+      return;
+    }
+
+    items.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "result-card";
+      card.innerHTML = `
+        <div class="result-top">
+          <div class="tag ${item.type === "ASHA" ? "asha" : "doctor"}">${item.type}</div>
+          <div class="distance">${item.distanceKm} km</div>
+        </div>
+        <div class="name">${item.name}</div>
+        <div class="meta">${item.area}</div>
+        <div class="row">
+          <a class="call" href="tel:${item.phone}">📞 Call</a>
+          <a class="map" target="_blank" href="https://www.google.com/maps?q=${encodeURIComponent(item.area)}">🗺️ Map</a>
+        </div>
+      `;
+      resultsList.appendChild(card);
+    });
+  }
+
+  // ✅ Search button: only checks 6-digit validity
+  btnSearch.addEventListener("click", () => {
+    hideStatus();
+    locationBox.style.display = "none";
+
+    const pin = pincodeInput.value.trim();
+    if (!isValidSixDigitPin(pin)) {
+      showStatus("Permission denied.");
+      return;
+    }
+
+    renderResults(pin);
+  });
+
+  // ✅ Location button: only checks 6-digit validity then asks GPS
+  btnLocation.addEventListener("click", () => {
+    hideStatus();
+    locationBox.style.display = "none";
+
+    const pin = pincodeInput.value.trim();
+    if (!isValidSixDigitPin(pin)) {
+      showStatus("Permission denied.");
+      return;
+    }
+
+    if (!navigator.geolocation) {
+      showStatus("Permission denied.");
+      return;
+    }
+   
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        latEl.textContent = lat.toFixed(6);
+        lngEl.textContent = lng.toFixed(6);
+        locationBox.style.display = "flex";
+
+        renderResults(pin);
+      },
+      () => showStatus("Permission denied."),
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  });
+  // ✅ Press Enter after typing pincode -> automatically trigger Search
+pincodeInput.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    e.preventDefault();      // Prevent form refresh (if inside form)
+    btnSearch.click();       // Trigger search button
+  }
+});
+</script>
+</body>
+</html>

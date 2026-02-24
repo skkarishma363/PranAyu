@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PranAyu - Nearest Pharmacies</title>
+
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="css/pharmacies.css">
+</head>
+
+<body>
+
+  <!-- ===== LOGO NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="leafLog.png" alt="PranAyu Logo">
+      <span>PranAyu</span>
+    </div>
+  </nav>
+
+  <h1>💊 Nearest Pharmacies - Maredumilli</h1>
+
+  <div class="search-wrap">
+    <input type="text" id="searchInput" class="search"
+           placeholder="Search pharmacy..."
+           onkeyup="filterCards()">
+  </div>
+
+  <div class="container" id="pharmacyCards"></div>
+
+  <script>
+    const pharmacies = [
+      { name:"Sujatha Medical & General Stores", location:"Maredumilli Main Road", distance:"0.5 km" },
+      { name:"Sri Padma Keshav Medicals", location:"Gudisa Road, Maredumilli", distance:"0.8 km" },
+      { name:"Sri Harikrishna Clinic Pharmacy", location:"Gudisa Road", distance:"1 km" },
+      { name:"Gilead Medicals", location:"Rajavommangi", distance:"18 km" },
+      { name:"Sri Lakshmi Medicals", location:"Market Road, Rajavommangi", distance:"19 km" },
+      { name:"Vinayaka Medicals", location:"Rampachodavaram", distance:"22 km" },
+      { name:"Lakshmi Ganapati Medical Shop", location:"Devipatnam Road", distance:"25 km" },
+      { name:"Star Medicals", location:"K.O. Mallavaram", distance:"28 km" },
+      { name:"Devi Sri Medicals", location:"Main Road Area", distance:"30 km" },
+      { name:"Patanjali Pharmacy", location:"Rampachodavaram Area", distance:"23 km" },
+      { name:"Apollo Pharmacy", location:"Rampachodavaram Main Road", distance:"24 km" },
+      { name:"MedPlus Pharmacy", location:"Rajavommangi Junction", distance:"20 km" }
+    ];
+
+    const container = document.getElementById("pharmacyCards");
+
+    function loadCards(data){
+      container.innerHTML="";
+      data.forEach(item=>{
+        const card=document.createElement("div");
+        card.className="card";
+        card.innerHTML=`
+          <div class="name">🏥 ${item.name}</div>
+          <div class="location">📍 ${item.location}</div>
+          <div class="distance">📏 Distance: ${item.distance}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterCards(){
+      const value=document.getElementById("searchInput").value.toLowerCase();
+      const filtered=pharmacies.filter(pharmacy =>
+        pharmacy.name.toLowerCase().includes(value)
+      );
+      loadCards(filtered);
+    }
+
+    loadCards(pharmacies);
+  </script>
+
+</body>
+</html>
