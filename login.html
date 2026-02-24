@@ -4,84 +4,80 @@
     <meta charset="UTF-8">
     <title>Account Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/login.css">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="leafLog.png" alt="PranAyu logo">
-            <span>PranAyu</span>
-        </div>
-    </nav>
+<h2>Login</h2>
 
-    <!-- Login Container -->
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="/submit_login" method="post">
-            <label for="username">Mobile number</label><br />
-      <input
+<form id="loginForm">
+    <label for="phone">Mobile number</label><br>
+    <input
         type="tel"
-        id="username"
-        name="username"
-        placeholder="Enter your Mobile Number"
+        id="phone"
+        placeholder="Enter your 10-digit Mobile Number"
         pattern="[0-9]{10}"
         maxlength="10"
-        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
         required
-      />
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" placeholder="Enter Password" required><br><br>
-            <button onclick="window.location.href='home.html'" type="submit">Login</button>
-            <br><br>
-        </form>
+    ><br><br>
 
-        <br><br>
+    <label for="password">Password</label><br>
+    <input
+        type="password"
+        id="password"
+        placeholder="Enter Password"
+        required
+    ><br><br>
 
-        <button onclick="window.location.href='signup.html'" type="button">
-            Create Account
-        </button>
-    </div>
+    <button type="submit">Login</button>
+</form>
 
-     <!-- Supabase CDN -->
+<br><br>
+
+<button type="button" onclick="window.location.href='signup.html'">
+    Create Account
+</button>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Supabase Login Script -->
 <script>
-    const supabaseClient = window.supabase.createClient(
-        "https://ugqoldpuacpigsimycvm.supabase.co",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVncW9sZHB1YWNwaWdzaW15Y3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NDE4ODksImV4cCI6MjA4NzMxNzg4OX0.vnNS8ai-xuCO_4nMVg5TLADreD3BphVXd-mE9_A_ka4"
-    );
+const supabase = window.supabase.createClient(
+    "https://ugqoldpuacpigsimycvm.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVncW9sZHB1YWNwaWdzaW15Y3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NDE4ODksImV4cCI6MjA4NzMxNzg4OX0.vnNS8ai-xuCO_4nMVg5TLADreD3BphVXd-mE9_A_ka4"
+);
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-        const phone = document.getElementById("username").value;
-const password = document.getElementById("password").value;
+    const phone = document.getElementById("phone").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-const fakeEmail = phone + "@pranayu.com";
+    if (!phone || phone.length !== 10) {
+        alert("Please enter valid 10-digit mobile number");
+        return;
+    }
 
-const { data, error } = await supabaseClient.auth.signInWithPassword({
-  email: fakeEmail,
-  password: password,
-});
+    if (!password) {
+        alert("Please enter password");
+        return;
+    }
 
-        if (error) {
-            alert("Login Failed: " + error.message);
-        } else {
-            alert("Login Successful!");
-            window.location.href = "home.html";
-        }
+    const fakeEmail = phone + "@pranayu.com";
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: fakeEmail,
+        password: password
     });
-</script>
 
+    if (error) {
+        alert("Login Failed: " + error.message);
+        return;
+    }
+
+    alert("Login Successful!");
+    window.location.href = "home.html";
+});
+</script>
 
 </body>
 </html>
