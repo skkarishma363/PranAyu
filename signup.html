@@ -106,10 +106,13 @@
       }
 
       // 1️⃣ Create Auth User
-      const { data, error } = await supabase.auth.signUp({
-        email: phone + "@pranayu.com",
-        password: password,
-      });
+      // Convert phone to fake email
+const fakeEmail = phone + "@pranayu.com";
+
+const { data, error } = await supabase.auth.signUp({
+  email: fakeEmail,
+  password: password,
+});
 
       if (error) {
         alert("Error: " + error.message);
@@ -137,5 +140,6 @@
   </script>
 </body>
 </html>
+
 
 
