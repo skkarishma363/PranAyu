@@ -26,8 +26,17 @@
     <div class="login-container">
         <h2>Login</h2>
         <form action="/submit_login" method="post">
-            <label for="username">Username or Mobile Number</label><br>
-            <input type="mobile number" id="username" name="username" placeholder="Enter username/Mobile Number" required><br><br>
+            <label for="username">Mobile number</label><br />
+      <input
+        type="tel"
+        id="username"
+        name="username"
+        placeholder="Enter your Mobile Number"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+        required
+      />
             <label for="password">Password</label><br>
             <input type="password" id="password" name="password" placeholder="Enter Password" required><br><br>
             <button onclick="window.location.href='home.html'" type="submit">Login</button>
