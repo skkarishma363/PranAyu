@@ -6,20 +6,21 @@
 }
 
 body {
-    height: 100vh;
-    background-color: #e1f8dc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Inter', sans-serif;
-}
+  min-height: 100vh;          /* not height:100vh */
+  background-color: #e1f8dc;
+  font-family: 'Georgia', serif;
 
-/* ===== Header ===== */
+  display: block;             /* remove flex centering */
+  overflow-y: auto;           /* allow scroll */
+  padding: 30px 0 60px;       /* space top & bottom */
+}
 .navbar {
-    position: absolute;
-    top: 35px;
-    left: 70px;
-    background: transparent;   /* important */
+  position: sticky;  /* stays visible when scrolling */
+  top: 0;
+  left: 0;
+  padding: 20px 60px;
+  background-color: #e1f8dc;  /* same as page */
+  z-index: 1000;
 }
 
 .logo {
@@ -41,6 +42,12 @@ body {
     font-weight: 1000;
     color: #2f6f3e;
     letter-spacing: 1px;
+}
+.login-container {
+  width: 300px;
+  text-align: center;
+
+  margin: 30px auto 0;   /* centers and keeps stable */
 }
 .login-container {
     width: 300px;
