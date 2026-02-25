@@ -63,15 +63,20 @@
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const phone = document.getElementById("username").value;
-const password = document.getElementById("password").value;
+        const phone = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
 
-const fakeEmail = phone + "@pranayu.com";
+        if (!phone || !password) {
+            alert("Please enter mobile number and password");
+            return;
+        }
 
-const { data, error } = await supabaseClient.auth.signInWithPassword({
-  email: fakeEmail,
-  password: password,
-});
+        const fakeEmail = phone + "@pranayu.com";
+
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email: fakeEmail,
+            password: password,
+        });
 
         if (error) {
             alert("Login Failed: " + error.message);
@@ -81,10 +86,9 @@ const { data, error } = await supabaseClient.auth.signInWithPassword({
         }
     });
 </script>
-
-
 </body>
 </html>
+
 
 
 
