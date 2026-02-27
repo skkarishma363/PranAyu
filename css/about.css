@@ -1,78 +1,136 @@
-/* Page Background */
-body {
-    margin: 0;
-    background-color: #d0ecd0;
-    height: 100vh;        /* full screen height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;     /* removes scroll */
-}
-.navbar {
-    position: absolute;
-    top: 15px;
-    left: 30px;
-    background: transparent;   /* important */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Logo Section */
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 40px;
-    color: #2f6f3e;
+html, body{
+  height: 100%;
 }
 
-/* About Box */
-.about-container {
-    width: 60%;
-    margin: 0;
-    padding: 10px;
-    background-color: #deedde;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+body{
+  background-color: #e1f8dc;
+  font-family: 'Inter', sans-serif;
+
+  /* ✅ No page scrolling at 100% */
+  overflow: hidden;
 }
 
-.about-container h2 {
-    color: #2f6f3e;
-    margin-bottom: 20px;
-    font-size: 32px;
+/* ===== NAVBAR (SAME AS LOGIN) ===== */
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #e1f8dc;
+  padding: 20px 60px;
 }
 
-.about-container p {
-    color: #2f6f3e;
-    font-size: 17px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-.about-container h3 {
-    color: #2f6f3e;
-    margin-bottom: 20px;
-    font-size: automatic;
-}
-.about-container h4 {
-    color: #2f6f3e;
-    margin-bottom: 20px;
-    font-size: automatic;
-}
-.feature-box {
-    display: flex;
-    
-    justify-content: center;
-    gap: 25px;
-    margin-top: 30px;
+.logo{
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.feature {
-    width: 30%;
-    background: #c2d5c3;
-    padding: 20px;
-    border-radius: 20px;
-    transition:0.3s ease;
+.logo img{
+  height: 48px;  /* same as login */
+  width: auto;
+  display: block;
 }
+
+.logo span{
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 1000;
+  color: #2f6f3e;
+  letter-spacing: 1px;
+}
+
+/* ===== PAGE AREA (FIXED HEIGHT) ===== */
+.page{
+  height: calc(100vh - 88px); /* navbar space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 18px 24px;
+}
+
+/* ===== ABOUT BOX (FIT SCREEN) ===== */
+.about-container{
+  width: min(980px, 92%);
+  background-color: #cee5ce;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+
+  /* ✅ This guarantees it never forces page scroll */
+  max-height: 100%;
+  overflow-y: auto;
+
+  /* reduced padding so it fits at 100% */
+  padding: 28px 34px;
+}
+
+/* Titles (use clamp so it fits on all screens) */
+.about-container h2{
+  font-family: 'Cormorant Garamond', serif;
+  color:#2f6f3e;
+  margin-bottom: 16px;
+  font-size: clamp(28px, 3vw, 38px);
+}
+
+.about-subtitle{
+  font-family: 'Cormorant Garamond', serif;
+  color:#2f6f3e;
+  margin: 18px 0 12px;
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 700;
+}
+
+/* Paragraphs */
+.about-container p{
+  color:#2f6f3e;
+  font-size: 16px;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+/* Features */
+.feature-box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.feature{
+  width: min(260px, 100%);
+  background:#c2d5c3;
+  padding: 18px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+
+.feature h4{
+  color:#2f6f3e;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.feature p{
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
 .feature:hover{
-     transform: translateY(-5px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px){
+  .navbar{ padding: 16px 18px; }
+  .logo img{ height: 44px; }
+  .logo span{ font-size: 28px; }
+  .about-container{ padding: 22px 18px; }
 }

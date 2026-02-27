@@ -6,20 +6,20 @@
 }
 
 body {
-  min-height: 100vh;          /* not height:100vh */
+  min-height: 100vh;
   background-color: #e1f8dc;
   font-family: 'Georgia', serif;
-
-  display: block;             /* remove flex centering */
-  overflow-y: auto;           /* allow scroll */
-  padding: 30px 0 60px;       /* space top & bottom */
+  display: block;
+  overflow-y: auto;
+  padding: 30px 0 60px;
 }
+
 .navbar {
-  position: sticky;  /* stays visible when scrolling */
+  position: sticky;
   top: 0;
   left: 0;
   padding: 20px 60px;
-  background-color: #e1f8dc;  /* same as page */
+  background-color: #e1f8dc;
   z-index: 1000;
 }
 
@@ -27,7 +27,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: transparent;   /* removes grey box */
+    background: transparent;
 }
 
 .logo img {
@@ -43,15 +43,11 @@ body {
     color: #2f6f3e;
     letter-spacing: 1px;
 }
+
 .login-container {
   width: 300px;
   text-align: center;
-
-  margin: 30px auto 0;   /* centers and keeps stable */
-}
-.login-container {
-    width: 300px;
-    text-align: center;
+  margin: 30px auto 0;
 }
 
 /* Heading */
@@ -67,7 +63,7 @@ body {
 .login-container label {
     display: block;
     text-align: left;
-    margin-bottom: 0px;  /* tighter */
+    margin-bottom: 6px;
     color: #2f5e3a;
     font-size: 15px;
 }
@@ -81,9 +77,11 @@ body {
     outline: none;
     background-color: #c8dec1;
     font-size: 14px;
-    margin-bottom: 0px; /* reduced spacing */
     color: #2f5e3a;
     transition: 0.2s ease;
+
+    /* ✅ MAIN FIX: space between mobile and password */
+    margin-bottom: 18px;
 }
 
 .login-container input:focus {
@@ -101,7 +99,6 @@ body {
     font-size: 15px;
     cursor: pointer;
     margin-top: 5px;
-    margin-bottom: 0px; /* tighter */
     transition: 0.2s ease;
 }
 
@@ -109,12 +106,24 @@ body {
     background-color: #245730;
 }
 
-/* Text */
-.login-container p,
-.login-container label[for="create"] {
+/* ✅ NEW line text */
+.account-text {
     font-size: 14px;
     color: #2f5e3a;
-    margin-bottom: 10px;
+    margin-top: 12px;
+    margin-bottom: 14px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.account-text a {
+    color: #2f6f3e;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.account-text a:hover {
+    text-decoration: underline;
 }
 
 /* Create Button */
@@ -132,4 +141,20 @@ body {
 .login-container button[type="button"]:hover {
     background-color: #2f6f3e;
     color: white;
+}
+.forgot-text {
+    text-align: right;
+    margin-top: -6px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+}
+
+.forgot-text a {
+    color: #2f6f3e;
+    text-decoration: none;
+}
+
+.forgot-text a:hover {
+    text-decoration: underline;
 }

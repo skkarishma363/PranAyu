@@ -121,7 +121,7 @@ body {
 
 /* Style the dropdown button */
 .dropbtn {
-  color: rgb(15, 15, 15);
+  color: #8cbc97;
   padding: 16px;
   font-size: 16px;
   border: none;
@@ -154,7 +154,7 @@ body {
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-  background-color: #6cf48a;
+  background-color: #c3eecd;
 }
 
 /* Show the dropdown menu on hover over the parent container */
@@ -261,7 +261,7 @@ body {
 .secondary {
     margin-top: 25px;
     font-size: 24px;
-    color: #2e7d32;
+    color: #3c6c3f;
 }
 
 @keyframes fadeUp {
