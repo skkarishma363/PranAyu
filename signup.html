@@ -1,145 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/signup.css" />
-  <title>Create Account</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Eye icon library -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/signup.css">
+
+<title>Create Account</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-  <nav class="navbar">
-    <div class="logo">
-      <img src="leafLog.png" alt="PranAyu logo" />
-      <span>PranAyu</span>
-    </div>
-  </nav>
 
-  <div class="create-container">
-    <h2>Create Account</h2>
+<nav class="navbar">
+<div class="logo">
+<img src="leafLog.png">
+<span>PranAyu</span>
+</div>
+</nav>
 
-    <!-- ✅ IMPORTANT: add id="createForm" -->
-    <form id="createForm">
-      <label for="fullname">Full name</label><br />
-      <input type="text" id="fullname" name="fullname" placeholder="Enter your name" required />
-      <br /><br />
+<div class="create-container">
 
-      <label for="username">Mobile number</label><br />
-      <input
-        type="tel"
-        id="username"
-        name="username"
-        placeholder="Enter your Mobile Number"
-        pattern="[0-9]{10}"
-        maxlength="10"
-        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-        required
-      />
-      <br /><br />
+<h2>Create Account</h2>
 
-      <label for="age">Age</label><br />
-      <input type="number" id="age" name="age" placeholder="Enter your age" required />
-      <br /><br />
+<form id="createForm">
 
-      <label for="password">Password</label><br />
+<label>Full Name</label>
+<input type="text" id="fullname" required>
 
-      <!-- ✅ Password with eye icon inside input -->
-      <div class="password-wrapper">
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password must be strong"
-          required
-        />
-        <span class="toggle-password" id="togglePassword" aria-label="Show password">
-          <i id="eyeIcon" class="fa-solid fa-eye"></i>
-        </span>
-      </div>
+<label>Mobile Number</label>
+<input type="tel"
+id="username"
+pattern="[0-9]{10}"
+maxlength="10"
+required>
 
-      <br /><br />
+<label>Age</label>
+<input type="number" id="age" required>
 
-      <button type="submit">Create Account</button>
-    </form>
-  </div>
+<label>Password</label>
 
-  <!-- ✅ Eye toggle script -->
-  <script>
-    const toggle = document.getElementById("togglePassword");
-    const pwd = document.getElementById("password");
-    const icon = document.getElementById("eyeIcon");
+<div class="password-wrapper">
 
-    toggle.addEventListener("click", () => {
-      const isHidden = pwd.type === "password";
-      pwd.type = isHidden ? "text" : "password";
-      icon.classList.toggle("fa-eye");
-      icon.classList.toggle("fa-eye-slash");
-    });
-  </script>
+<input type="password"
+id="password"
+required>
 
-  <!-- ✅ Supabase script (keep outside form) -->
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js";
+<span id="togglePassword">
+<i id="eyeIcon" class="fa-solid fa-eye"></i>
+</span>
 
-    const supabaseUrl = "https://veslqhmsyhlhmouojpnj.supabase.co";
-    const supabaseKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2xxaG1zeWhsaG1vdW9qcG5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwODUyNDUsImV4cCI6MjA4NzY2MTI0NX0.CUCPoPjUTYRFagm76uW9j8GdcTrVHnyTDgif4F-FmY8";
+</div>
 
-    const supabase = createClient(supabaseUrl, supabaseKey);
+<button type="submit">
+Create Account
+</button>
 
-    const form = document.getElementById("createForm");
+</form>
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+</div>
 
-      const fullName = document.getElementById("fullname").value.trim();
-      const phone = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value;
 
-      // Basic check: exactly 10 digits
-      if (!/^\d{10}$/.test(phone)) {
-        alert("Mobile number must be exactly 10 digits.");
-        return;
-      }
+<script>
 
-      // 1️⃣ Create Auth User
-      // Convert phone to fake email
-const fakeEmail = phone + "@pranayu.com";
+const toggle = document.getElementById("togglePassword");
+const pwd = document.getElementById("password");
+const icon = document.getElementById("eyeIcon");
 
-const { data, error } = await supabase.auth.signUp({
-  email: fakeEmail,
-  password: password,
+toggle.addEventListener("click", () => {
+
+pwd.type =
+pwd.type === "password"
+? "text"
+: "password";
+
+icon.classList.toggle("fa-eye");
+icon.classList.toggle("fa-eye-slash");
+
 });
 
-      if (error) {
-        alert("Error: " + error.message);
-        return;
-      }
+</script>
 
-      // 2️⃣ Insert into users table
-      const { error: insertError } = await supabase.from("users").insert([
-        {
-          id: data.user.id,
-          name: fullName,
-          phone: phone,
-          role: "user",
-        },
-      ]);
 
-      if (insertError) {
-        alert("Error: " + insertError.message);
-        return;
-      }
 
-      alert("Account created successfully!");
-      window.location.href = "login.html";
-    });
-  </script>
+<script type="module">
+
+import { createClient }
+from "https://esm.sh/@supabase/supabase-js@2";
+
+
+const supabaseUrl =
+"https://veslqhmsyhlhmouojpnj.supabase.co";
+
+const supabaseKey =
+"YOUR_ANON_KEY";
+
+
+const supabase =
+createClient(supabaseUrl, supabaseKey);
+
+
+
+const form =
+document.getElementById("createForm");
+
+
+form.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+
+const name =
+document.getElementById("fullname").value.trim();
+
+const phone =
+document.getElementById("username").value.trim();
+
+const age =
+document.getElementById("age").value;
+
+const password =
+document.getElementById("password").value;
+
+
+
+if(!/^\d{10}$/.test(phone))
+{
+alert("Enter valid 10 digit number");
+return;
+}
+
+
+
+const email =
+phone + "@pranayu.com";
+
+
+
+const { data, error }
+=
+await supabase.auth.signUp({
+
+email: email,
+password: password
+
+});
+
+
+console.log(data,error);
+
+
+if(error)
+{
+alert(error.message);
+return;
+}
+
+
+if(!data.user)
+{
+alert("Signup failed");
+return;
+}
+
+
+
+const { error: insertError }
+=
+await supabase
+.from("users")
+.insert({
+
+id: data.user.id,
+name: name,
+phone: phone,
+age: age,
+role: "user"
+
+});
+
+
+if(insertError)
+{
+alert(insertError.message);
+return;
+}
+
+
+alert("Account created successfully");
+
+window.location.href="login.html";
+
+
+});
+
+</script>
+
 </body>
 </html>
+
 
 
 
