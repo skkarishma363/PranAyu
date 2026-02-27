@@ -31,17 +31,16 @@
   <div class="create-container">
     <h2>Create Account</h2>
 
-    <!-- ✅ IMPORTANT: add id="createForm" -->
-    <form id="createForm" method="post">
+    <form id="createForm">
+
       <label for="fullname">Full name</label><br />
-      <input type="text" id="fullname" name="fullname" placeholder="Enter your name" required />
+      <input type="text" id="fullname" placeholder="Enter your name" required />
       <br /><br />
 
       <label for="username">Mobile number</label><br />
       <input
         type="tel"
         id="username"
-        name="username"
         placeholder="Enter your Mobile Number"
         pattern="[0-9]{10}"
         maxlength="10"
@@ -51,25 +50,41 @@
       <br /><br />
 
       <label for="age">Age</label><br />
-      <input type="number" id="age" name="age" placeholder="Enter your age" required />
+      <input type="number" id="age" placeholder="Enter your age" required />
       <br /><br />
 
       <label for="password">Password</label><br />
 
+<<<<<<< HEAD
 <div class="password-wrapper">
   <input type="password"
          id="password"
          name="password"
          placeholder="Password must be strong"
          required />
+=======
+      <div class="password-wrapper">
+        <input
+          type="password"
+          id="password"
+          placeholder="Password must be strong"
+          required
+        />
+        <span class="toggle-password" id="togglePassword">
+          <i id="eyeIcon" class="fa-solid fa-eye"></i>
+        </span>
+      </div>
+>>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
 
   <i id="togglePassword" class="fa-solid fa-eye-slash toggle-password"></i>
 </div>
       <br /><br />
 
       <button type="submit">Create Account</button>
+
     </form>
   </div>
+<<<<<<< HEAD
 <script>
 function goBack() {
   if (window.history.length > 1) {
@@ -79,6 +94,10 @@ function goBack() {
   }
 }
 </script>
+=======
+
+  <!-- Eye toggle -->
+>>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
   <script>
   const toggle = document.getElementById("togglePassword");
   const password = document.getElementById("password");
@@ -96,63 +115,81 @@ function goBack() {
   });
 </script>
 
-  <!-- ✅ Supabase script (keep outside form) -->
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-    const supabaseUrl = "https://ugqoldpuacpigsimycvm.supabase.co";
-    const supabaseKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVncW9sZHB1YWNwaWdzaW15Y3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NDE4ODksImV4cCI6MjA4NzMxNzg4OX0.vnNS8ai-xuCO_4nMVg5TLADreD3BphVXd-mE9_A_ka4";
-
-    const supabase = createClient(supabaseUrl, supabaseKey);
+  <!-- ✅ Local Storage Signup Script -->
+  <script>
 
     const form = document.getElementById("createForm");
 
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", function(e)
+    {
       e.preventDefault();
 
-      const fullName = document.getElementById("fullname").value.trim();
-      const phone = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value;
+      const fullName =
+      document.getElementById("fullname").value.trim();
 
-      // Basic check: exactly 10 digits
-      if (!/^\d{10}$/.test(phone)) {
-        alert("Mobile number must be exactly 10 digits.");
+      const phone =
+      document.getElementById("username").value.trim();
+
+      const age =
+      document.getElementById("age").value.trim();
+
+      const password =
+      document.getElementById("password").value;
+
+
+      if(!/^\d{10}$/.test(phone))
+      {
+        alert("Mobile number must be exactly 10 digits");
         return;
       }
 
-      // 1️⃣ Create Auth User
-      // Convert phone to fake email
-const fakeEmail = phone + "@pranayu.com";
 
-const { data, error } = await supabase.auth.signUp({
-  email: fakeEmail,
-  password: password,
-});
+      let users =
+      JSON.parse(localStorage.getItem("users")) || [];
 
-      if (error) {
-        alert("Error: " + error.message);
+
+      let exists =
+      users.find(user => user.phone === phone);
+
+
+      if(exists)
+      {
+        alert("User already exists");
         return;
       }
 
-      // 2️⃣ Insert into users table
-      const { error: insertError } = await supabase.from("users").insert([
-        {
-          id: data.user.id,
-          name: fullName,
-          phone: phone,
-          role: "user",
-        },
-      ]);
 
-      if (insertError) {
-        alert("Error: " + insertError.message);
-        return;
-      }
+      users.push({
+        name: fullName,
+        phone: phone,
+        age: age,
+        password: password,
+        role: "user"
+      });
+
+
+      localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+      );
+
 
       alert("Account created successfully!");
+
       window.location.href = "login.html";
+
     });
+
   </script>
+
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+
+
+
+
+>>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
