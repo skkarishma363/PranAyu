@@ -7,16 +7,26 @@
   <title>Create Account</title>
 
   <!-- Eye icon library -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
   <nav class="navbar">
-    <div class="logo">
-      <img src="leafLog.png" alt="PranAyu logo" />
-      <span>PranAyu</span>
-    </div>
-  </nav>
+
+  <!-- Back button LEFT -->
+  <button class="back-btn" onclick="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Back</span>
+  </button>
+
+  <!-- Logo RIGHT -->
+  <div class="logo">
+    <img src="leafLog.png" alt="PranAyu logo" />
+    <span>PranAyu</span>
+  </div>
+
+</nav>
 
   <div class="create-container">
     <h2>Create Account</h2>
@@ -45,6 +55,14 @@
 
       <label for="password">Password</label><br />
 
+<<<<<<< HEAD
+<div class="password-wrapper">
+  <input type="password"
+         id="password"
+         name="password"
+         placeholder="Password must be strong"
+         required />
+=======
       <div class="password-wrapper">
         <input
           type="password"
@@ -56,27 +74,46 @@
           <i id="eyeIcon" class="fa-solid fa-eye"></i>
         </span>
       </div>
+>>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
 
+  <i id="togglePassword" class="fa-solid fa-eye-slash toggle-password"></i>
+</div>
       <br /><br />
 
       <button type="submit">Create Account</button>
 
     </form>
   </div>
+<<<<<<< HEAD
+<script>
+function goBack() {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = "home.html";
+  }
+}
+</script>
+=======
 
   <!-- Eye toggle -->
+>>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
   <script>
-    const toggle = document.getElementById("togglePassword");
-    const pwd = document.getElementById("password");
-    const icon = document.getElementById("eyeIcon");
+  const toggle = document.getElementById("togglePassword");
+  const password = document.getElementById("password");
 
-    toggle.addEventListener("click", () => {
-      const isHidden = pwd.type === "password";
-      pwd.type = isHidden ? "text" : "password";
-      icon.classList.toggle("fa-eye");
-      icon.classList.toggle("fa-eye-slash");
-    });
-  </script>
+  toggle.addEventListener("click", () => {
+    if (password.type === "password") {
+      password.type = "text";
+      toggle.classList.remove("fa-eye-slash");
+      toggle.classList.add("fa-eye");
+    } else {
+      password.type = "password";
+      toggle.classList.remove("fa-eye");
+      toggle.classList.add("fa-eye-slash");
+    }
+  });
+</script>
 
 
   <!-- ✅ Local Storage Signup Script -->
@@ -147,8 +184,12 @@
   </script>
 
 </body>
+<<<<<<< HEAD
+</html>
+=======
 </html>
 
 
 
 
+>>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9

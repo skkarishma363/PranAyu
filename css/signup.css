@@ -12,19 +12,52 @@ body {
 
   display: block;             /* remove flex centering */
   overflow-y: auto;           /* allow scroll */
-  padding: 30px 0 60px;       /* space top & bottom */
+  padding: 0px 0 60px;       /* space top & bottom */
 }
 .navbar {
-  position: sticky;  /* stays visible when scrolling */
+  position: sticky;
   top: 0;
-  left: 0;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* pushes items to both ends */
+
   padding: 20px 60px;
-  background-color: #e1f8dc;  /* same as page */
+  background-color: #e1f8dc;
   z-index: 1000;
 }
+
+/* Back button (arrow only, no border) */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2f6f3e;
+
+  transition: 0.2s ease;
+}
+
+.back-btn i {
+  font-size: 18px;
+}
+
+.back-btn:hover {
+  color: #1f4d2a;
+  transform: translateX(-3px);
+}
+
 .logo {
     display: flex;
-    align-items: top-left-allign;
+    align-items: center;
     gap: 12px;
     background: transparent;   /* removes grey box */
 }
@@ -34,6 +67,7 @@ body {
     width: auto;
     display: block;
 }
+
 .logo span {
     font-family: 'Cormorant Garamond', serif;
     font-size: 34px;
@@ -104,55 +138,30 @@ body {
     transition: 0.3s ease;
 }
 /* Password wrapper */
-.password-wrapper {
-    position: relative;
-    width: 100%;
+/* Password wrapper */
+.password-wrapper{
+  position: relative;
+  width: 100%;
 }
 
-.password-wrapper input {
-    width: 100%;
-    padding: 15px;
-    padding-right: 100px;   /* space for eye */
-    border-radius: 25px;
-    border: none;
-    outline: none;
-    background-color: #cde9c3;
-    font-size: 14px;
-    color: #2f5e3a;
-}
-
-/* Eye icon */
-.toggle-password {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #448252;
-    font-size: 16px;
-}
-
-
-
-.password-wrapper input {
-    width: 100%;
-    padding: 15px;
-    padding-right: 100px;   /* space for eye */
-    border-radius: 25px;
-    border: none;
-    outline: none;
-    background-color: #cde9c3;
-    font-size: 14px;
-    color: #2f5e3a;
+/* Input padding so text doesn't overlap eye */
+.password-wrapper input{
+  width: 100%;
+  padding: 14px 45px 14px 18px;  /* right padding for eye */
+  border-radius: 30px;
+  border: none;
+  background-color: #cfe3c9;
+  font-size: 16px;
+  outline: none;
 }
 
 /* Eye icon */
-.toggle-password {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #448252;
-    font-size: 16px;
+.toggle-password{
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #2f6f3e;
+  font-size: 18px;
 }

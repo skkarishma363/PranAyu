@@ -1,36 +1,47 @@
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
 }
 
-body{
-  background-color:#e1f8dc;   /* PranAyu pastel */
-  min-height:100vh;
+body {
+  min-height: 100vh;          /* not height:100vh */
+  background-color: #e1f8dc;
+  font-family: 'Georgia', serif;
+
+  display: block;             /* remove flex centering */
+  overflow-y: auto;           /* allow scroll */
+  padding: 30px 0 60px;       /* space top & bottom */
+}
+.navbar {
+  position: sticky;  /* stays visible when scrolling */
+  top: 0;
+  left: 0;
+  padding: 20px 60px;
+  background-color: #e1f8dc;  /* same as page */
+  z-index: 1000;
 }
 
-/* ===== LOGO NAVBAR ===== */
-.navbar{
-  padding:20px 60px 10px 60px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;   /* removes grey box */
 }
 
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.logo img {
+    height: 48px;
+    width: auto;
+    display: block;
 }
 
-.logo img{
-  height:48px;
-  width:auto;
-}
-
-.logo span{
-  font-size:34px;
-  font-weight:1000;
-  color:#2f6f3e;
-  letter-spacing:1px;
+.logo span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 1000;
+    color: #2f6f3e;
+    letter-spacing: 1px;
 }
 
 /* ===== PAGE TITLE ===== */
