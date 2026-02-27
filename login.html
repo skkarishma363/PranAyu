@@ -1,304 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="css/signup.css"/>
-  <title>Create Account</title>
+    <meta charset="UTF-8">
+    <title>Account Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Eye icon -->
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/login.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<<<<<<< HEAD
     <!-- Navbar -->
     <nav class="navbar">
-
-  <!-- Back button LEFT -->
-  <button class="back-btn" onclick="goBack()">
-    <i class="fa-solid fa-arrow-left"></i>
-    <span>Back</span>
-  </button>
-
-  <!-- Logo RIGHT -->
-  <div class="logo">
-    <img src="leafLog.png" alt="PranAyu logo" />
-    <span>PranAyu</span>
-  </div>
-
-</nav>
+        <div class="logo">
+            <img src="leafLog.png" alt="PranAyu logo">
+            <span>PranAyu</span>
+        </div>
+    </nav>
 
     <!-- Login Container -->
     <div class="login-container">
         <h2>Login</h2>
-        <form id="loginForm">
-            <label for="username">Mobile number</label><br />
-      <input
-        type="tel"
-        id="username"
-        name="username"
-        placeholder="Enter your Mobile Number"
-        pattern="[0-9]{10}"
-        maxlength="10"
-        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-        required
-      />
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" placeholder="Enter Password" required><br><br>
-            <button type="submit">Login</button>
-            <br><br>
+
+        <!-- ✅ ONLY fix: add id so your JS works -->
+        <form id="loginForm" action="/submit_login" method="post">
+
+            <label for="username">Mobile number</label>
+            <input
+                type="tel"
+                id="username"
+                name="username"
+                placeholder="Enter your Mobile Number"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                required
+            />
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            <p class="forgot-text">
+    <a href="#">Forgot password?</a>
+</p>
+
+
+
+            <button onclick="window.location.href='home.html'" type="submit">Login</button>
+
+            <!-- ✅ NEW line (between Login and Create Account) -->
+            <p class="account-text">
+                Don’t have an account? 
+            </p>
+
         </form>
-=======
-<nav class="navbar">
-  <div class="logo">
-    <img src="leafLog.png" alt="PranAyu logo"/>
-    <span>PranAyu</span>
-  </div>
-</nav>
 
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
-
-<div class="create-container">
-
-<<<<<<< HEAD
         <button onclick="window.location.href='signup.html'" type="button">
             Create Account
         </button>
     </div>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Supabase Login Script -->
     <script>
-function goBack() {
-  if (window.history.length > 1) {
-    window.history.back();
-  } else {
-    window.location.href = "home.html";
-  }
-}
-</script>
-=======
-<h2>Create Account</h2>
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
+        const supabaseClient = window.supabase.createClient(
+            "https://ugqoldpuacpigsimycvm.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVncW9sZHB1YWNwaWdzaW15Y3ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NDE4ODksImV4cCI6MjA4NzMxNzg4OX0.vnNS8ai-xuCO_4nMVg5TLADreD3BphVXd-mE9_A_ka4"
+        );
 
-<form id="createForm">
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-<<<<<<< HEAD
+            const phone = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
 
-<!-- Supabase Login Script -->
-<script>
-    const supabaseClient = window.supabase.createClient(
-        "https://veslqhmsyhlhmouojpnj.supabase.co",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2xxaG1zeWhsaG1vdW9qcG5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwODUyNDUsImV4cCI6MjA4NzY2MTI0NX0.CUCPoPjUTYRFagm76uW9j8GdcTrVHnyTDgif4F-FmY8"
-    );
-=======
-<label>Full name</label><br>
-<input
-type="text"
-id="fullname"
-placeholder="Enter your name"
-required>
-<br><br>
+            const fakeEmail = phone + "@pranayu.com";
 
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: fakeEmail,
+                password: password,
+            });
 
-<label>Mobile number</label><br>
-<input
-type="tel"
-id="phone"
-placeholder="Enter Mobile Number"
-maxlength="10"
-pattern="[0-9]{10}"
-oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-required>
-<br><br>
-
-
-<label>Age</label><br>
-<input
-type="number"
-id="age"
-placeholder="Enter your age"
-required>
-<br><br>
-
-
-<label>Password</label><br>
-
-<div class="password-wrapper">
-
-<input
-type="password"
-id="password"
-placeholder="Enter password"
-required>
-
-<span id="togglePassword">
-<i id="eyeIcon" class="fa-solid fa-eye"></i>
-</span>
-
-</div>
-
-<br><br>
-
-<button type="submit">
-Create Account
-</button>
-
-</form>
-
-</div>
-
-
-
-<!-- PASSWORD SHOW / HIDE -->
-<script>
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
-
-const toggle =
-document.getElementById("togglePassword");
-
-<<<<<<< HEAD
-        const phone = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-
-        if (!phone || !password) {
-            alert("Please enter mobile number and password");
-            return;
-        }
-
-        const fakeEmail = phone + "@pranayu.com";
-
-        const { data, error } = await supabaseClient.auth.signInWithPassword({
-            email: fakeEmail,
-            password: password,
+            if (error) {
+                alert("Login Failed: " + error.message);
+            } else {
+                alert("Login Successful!");
+                window.location.href = "home.html";
+            }
         });
-=======
-const pwd =
-document.getElementById("password");
+    </script>
 
-const icon =
-document.getElementById("eyeIcon");
-
-
-toggle.onclick = function()
-{
-
-if(pwd.type === "password")
-{
-pwd.type = "text";
-icon.classList.replace("fa-eye","fa-eye-slash");
-}
-else
-{
-pwd.type = "password";
-icon.classList.replace("fa-eye-slash","fa-eye");
-}
-
-}
-
-</script>
-
-
-
-<!-- LOCAL STORAGE SIGNUP -->
-<script>
-
-document
-.getElementById("createForm")
-.addEventListener("submit", function(e)
-{
-
-e.preventDefault();
-
-
-let name =
-document.getElementById("fullname").value.trim();
-
-let phone =
-document.getElementById("phone").value.trim();
-
-let age =
-document.getElementById("age").value.trim();
-
-let password =
-document.getElementById("password").value.trim();
-
-
-
-/* validate phone */
-if(!/^\d{10}$/.test(phone))
-{
-alert("Enter valid 10-digit mobile number");
-return;
-}
-
-
-
-/* get existing users */
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
-
-
-
-/* check duplicate */
-let exists =
-users.some(user => user.phone === phone);
-
-
-if(exists)
-{
-alert("Account already exists. Please login.");
-return;
-}
-
-
-
-/* create new user */
-let newUser =
-{
-name: name,
-phone: phone,
-age: age,
-password: password,
-role: "user"
-};
-
-
-
-/* save */
-users.push(newUser);
-
-localStorage.setItem(
-"users",
-JSON.stringify(users)
-);
-
-
-
-alert("Account created successfully ✅");
-
-
-/* redirect to login */
-window.location.href = "login.html";
-
-
-});
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
-
-</script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
-
-
-
-
-
-
-
-
-
-
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
