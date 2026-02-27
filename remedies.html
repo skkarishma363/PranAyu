@@ -1,122 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>PranAyu - Remedies</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/remedies.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-    <!-- Logo -->
-    <nav class="navbar">
-
-  <!-- Back button LEFT -->
-  <button class="back-btn" onclick="goBack()">
-    <i class="fa-solid fa-arrow-left"></i>
-    <span>Back</span>
-  </button>
-
-  <!-- Logo RIGHT -->
-  <div class="logo">
-    <img src="leafLog.png" alt="PranAyu logo" />
-    <span>PranAyu</span>
-  </div>
-
-</nav>
-
-    <h1>🌿 Remedy Cards</h1>
-
-    <div class="container" id="cards"></div>
+<script src="remediesData.js"></script>
 <script>
-function goBack() {
-  if (window.history.length > 1) {
-    window.history.back();
-  } else {
-    window.location.href = "home.html";
-  }
-}
-</script>
-<script>
-const remedies = [
-{
-symptom:"Headache",
-remedy:"Drink water + Rest + Cold compress",
-process:"Hydrates body, reduces stress and inflammation."
-},
-{
-symptom:"Common Cold",
-remedy:"Steam inhalation + Gargle + Warm fluids",
-process:"Clears nasal blockage and soothes throat."
-},
-{
-symptom:"Fever (Mild)",
-remedy:"Hydration + Rest + Lukewarm bath",
-process:"Helps immune system recover and lowers temperature."
-},
-{
-symptom:"Cough",
-remedy:"Honey with warm water + Steam",
-process:"Soothes throat irritation and reduces mucus."
-},
-{
-symptom:"Stomach Pain",
-remedy:"Warm water + Light diet + Massage",
-process:"Improves digestion and reduces gas."
-},
-{
-symptom:"Diarrhea",
-remedy:"ORS + Coconut water + Avoid junk food",
-process:"Restores fluids and prevents dehydration."
-},
-{
-symptom:"Constipation",
-remedy:"Fiber food + Warm water + Exercise",
-process:"Improves bowel movement naturally."
-},
-{
-symptom:"Body Pain",
-remedy:"Warm bath + Stretching + Rest",
-process:"Relaxes muscles and improves circulation."
-},
-{
-symptom:"Acidity",
-remedy:"Avoid spicy food + Small meals + Milk",
-process:"Reduces acid production and irritation."
-},
-{
-symptom:"Fatigue",
-remedy:"Proper sleep + Balanced diet + Light exercise",
-process:"Restores energy and improves stamina."
-},
-{
-symptom:"Nausea",
-remedy:"Ginger tea + Small light meals + Avoid oily spicy food",
-process:"Ginger calms the stomach."
-},
-{
-symptom:"Sore Throat",
-remedy:"Salt water gargle + Warm herbal tea + Avoid cold beverages",
-process:"Soothes irritation."
-}
-];
 
 const container = document.getElementById("cards");
 
-remedies.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-        <div class="symptom">🩺 ${item.symptom}</div>
-        <div class="remedy">Remedy:</div>
-        <div>${item.remedy}</div>
-        <div class="remedy">Remedy Process / Uses:</div>
-        <div class="process">${item.process}</div>
-    `;
-    container.appendChild(card);
-});
-</script>
+function getCurrentLanguage() {
+    return localStorage.getItem("lang") || "en";
+}
 
-</body>
-</html>
+function renderRemedies() {
+
+    const lang = getCurrentLanguage();
+    container.innerHTML = "";
+
+    remedies.forEach(item => {
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <div class="symptom">🩺 ${item.symptom[lang]}</div>
+            <div class="remedy">${lang === "en" ? "Remedy:" : 
+                                  lang === "hi" ? "उपचार:" : 
+                                  "చికిత్స:"}</div>
+            <div>${item.remedy[lang]}</div>
+            <div class="remedy">
+                ${lang === "en" ? "Remedy Process / Uses:" :
+                  lang === "hi" ? "उपयोग:" :
+                  "ఉపయోగం:"}
+            </div>
+            <div class="process">${item.process[lang]}</div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", renderRemedies);
+
+// Re-render when language changes
+window.addEventListener("storage", renderRemedies);
+
+</script>
