@@ -4,63 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/home.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <title>Home page</title>
 </head>
+
 <body>
-        <nav class="navbar">
-            <div class="logo"><img src="leafLog.png" alt="Green stylized plant logo with two large leaves and a central stem topped by a small circular dot suggesting growth, wellness, and calm; on a plain white background; no text inside the logo (page shows the word PranAyu beside it)" width="50" height="20">PranAyu</div>
-                <ul class="nav-links">
-                    <li><a href="remedies.html">Remedies</a></li>
-                    <li><a href="pharmacies.html">Pharmacies</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            <div class="dropdown">
-            <button class="dropbtn">☰</button>
-            <div class="dropdown-content">
-                <a href="profile.html">Profile</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Create Account</a>
-                <a href="index.html">Logout</a>
-            </div>
-            </div>
-        </nav>
-    <div class="hero-text">
-    <h2 class="welcome-text">
-    <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span>
-    <span class="space"> </span>
-    <span>t</span><span>o</span>
-    <span class="space"> </span>
-    <span>P</span><span>r</span><span>a</span><span>n</span><span>A</span><span>y</span><span>u</span>
-</h2>
+
+<nav class="navbar">
+    <div class="logo">
+        <img src="leafLog.png" width="50" height="20">
+        PranAyu
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="#" data-i18n="navRemedies">Remedies</a></li>
+        <li><a href="#" data-i18n="navPharmacies">Pharmacies</a></li>
+        <li><a href="#" data-i18n="navAbout">About Us</a></li>
+        <li><a href="#" data-i18n="navContact">Contact</a></li>
+
+        <!-- Language Switcher -->
+        <li class="lang-item">
+    <select id="languageSwitcher" class="lang-select">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="te">తెలుగు</option>
+    </select>
+</li>
+    </ul>
+
+    <div class="dropdown">
+        <button class="dropbtn">☰</button>
+        <div class="dropdown-content">
+            <a href="profile.html" data-i18n="profile">Profile</a>
+            <a href="login.html" data-i18n="login">Login</a>
+            <a href="create.html" data-i18n="create">Create Account</a>
+            <a href="index.html" data-i18n="logout">Logout</a>
+        </div>
+    </div>
+</nav>
 
 
-    <p class="Hfade-text">Your personal assistant for natural remedies and wellness.</p>
+<div class="hero-text">
 
-    <h2 class="secondary fade-text">What's bothering you?</h2>
-    <p class="fade-text">Describe your symptoms and we'll suggest gentle home remedies.</p>
+    <h2 class="welcome-text" data-i18n="welcomeText">
+        Welcome to PranAyu
+    </h2>
+
+    <p class="Hfade-text" data-i18n="assistantText">
+        Your personal assistant for natural remedies and wellness.
+    </p>
+
+    <h2 class="secondary fade-text" data-i18n="bothering">
+        What's bothering you?
+    </h2>
+
+    <p class="fade-text" data-i18n="describe">
+        Describe your symptoms and we'll suggest gentle home remedies.
+    </p>
+
 </div>
 
-    <div class="search-container">
-    <button class="icon-btn mic-btn" aria-label="Voice input">
-        <!-- Mic SVG -->
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"
-                  stroke="currentColor" stroke-width="1.8"/>
-            <path d="M19 11a7 7 0 0 1-14 0"
-                  stroke="currentColor" stroke-width="1.8"/>
-            <path d="M12 18v3"
-                  stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-    </button>
 
-    <input type="text" placeholder="Ask anything" class="search-input">
+<div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
 
-    <button class="icon-btn send-btn" aria-label="Send">
-        ➤
-    </button>
+    <div class="chat-input-area">
+
+        <button class="mic-btn" onclick="startListening()" aria-label="Voice input">
+            <svg viewBox="0 0 24 24" class="mic-icon">
+                <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/>
+                <path d="M19 11a7 7 0 0 1-14 0"/>
+                <line x1="12" y1="18" x2="12" y2="22"/>
+            </svg>
+        </button>
+
+        <input type="text"
+               id="user-input"
+               data-i18n-placeholder="placeholderText"
+               placeholder="Describe your symptoms..." />
+
+        <button onclick="handleUserInput()" data-i18n="sendBtn">
+            Send
+        </button>
+
+    </div>
 </div>
-</div>
+
+
+<!-- Scripts (Correct Order) -->
+<script src="remediesData.js"></script>
+<script src="chat.js"></script>
+
 </body>
 </html>

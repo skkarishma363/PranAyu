@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/signup.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>Create Account</title>
 
   <!-- Eye icon library -->
@@ -46,19 +47,15 @@
 
       <label for="password">Password</label><br />
 
-      <!-- ✅ Password with eye icon inside input -->
-      <div class="password-wrapper">
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password must be strong"
-          required
-        />
-        <span class="toggle-password" id="togglePassword" aria-label="Show password">
-          <i id="eyeIcon" class="fa-solid fa-eye"></i>
-        </span>
-      </div>
+<div class="password-wrapper">
+  <input type="password"
+         id="password"
+         name="password"
+         placeholder="Password must be strong"
+         required />
+
+  <i id="togglePassword" class="fa-solid fa-eye-slash toggle-password"></i>
+</div>
 
       <br /><br />
 
@@ -68,17 +65,19 @@
 
   <!-- ✅ Eye toggle script -->
   <script>
-    const toggle = document.getElementById("togglePassword");
-    const pwd = document.getElementById("password");
-    const icon = document.getElementById("eyeIcon");
+  const toggle = document.getElementById("togglePassword");
+  const password = document.getElementById("password");
 
-    toggle.addEventListener("click", () => {
-      const isHidden = pwd.type === "password";
-      pwd.type = isHidden ? "text" : "password";
-      icon.classList.toggle("fa-eye");
-      icon.classList.toggle("fa-eye-slash");
-    });
-  </script>
+  toggle.addEventListener("click", () => {
+    if (password.type === "password") {
+      password.type = "text";
+      toggle.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+      password.type = "password";
+      toggle.classList.replace("fa-eye-slash", "fa-eye");
+    }
+  });
+</script>
 
   <!-- ✅ Supabase script (keep outside form) -->
   <script type="module">
