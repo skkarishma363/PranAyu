@@ -1,94 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Account Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/signup.css"/>
+  <title>Create Account</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/login.css">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Eye icon -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="leafLog.png" alt="PranAyu logo">
-            <span>PranAyu</span>
-        </div>
-    </nav>
+<nav class="navbar">
+  <div class="logo">
+    <img src="leafLog.png" alt="PranAyu logo"/>
+    <span>PranAyu</span>
+  </div>
+</nav>
 
-    <!-- Login Container -->
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <label for="username">Mobile number</label><br />
-      <input
-        type="tel"
-        id="username"
-        name="username"
-        placeholder="Enter your Mobile Number"
-        pattern="[0-9]{10}"
-        maxlength="10"
-        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-        required
-      />
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" placeholder="Enter Password" required><br><br>
-            <button type="submit">Login</button>
-            <br><br>
-        </form>
 
-        <br><br>
+<div class="create-container">
 
-        <button onclick="window.location.href='signup.html'" type="button">
-            Create Account
-        </button>
-    </div>
+<h2>Create Account</h2>
 
-     <!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<form id="createForm">
 
-<!-- Supabase Login Script -->
+<label>Full name</label><br>
+<input
+type="text"
+id="fullname"
+placeholder="Enter your name"
+required>
+<br><br>
+
+
+<label>Mobile number</label><br>
+<input
+type="tel"
+id="phone"
+placeholder="Enter Mobile Number"
+maxlength="10"
+pattern="[0-9]{10}"
+oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+required>
+<br><br>
+
+
+<label>Age</label><br>
+<input
+type="number"
+id="age"
+placeholder="Enter your age"
+required>
+<br><br>
+
+
+<label>Password</label><br>
+
+<div class="password-wrapper">
+
+<input
+type="password"
+id="password"
+placeholder="Enter password"
+required>
+
+<span id="togglePassword">
+<i id="eyeIcon" class="fa-solid fa-eye"></i>
+</span>
+
+</div>
+
+<br><br>
+
+<button type="submit">
+Create Account
+</button>
+
+</form>
+
+</div>
+
+
+
+<!-- PASSWORD SHOW / HIDE -->
 <script>
-    const supabaseClient = window.supabase.createClient(
-        "https://veslqhmsyhlhmouojpnj.supabase.co",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2xxaG1zeWhsaG1vdW9qcG5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwODUyNDUsImV4cCI6MjA4NzY2MTI0NX0.CUCPoPjUTYRFagm76uW9j8GdcTrVHnyTDgif4F-FmY8"
-    );
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
+const toggle =
+document.getElementById("togglePassword");
 
-        const phone = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+const pwd =
+document.getElementById("password");
 
-        if (!phone || !password) {
-            alert("Please enter mobile number and password");
-            return;
-        }
+const icon =
+document.getElementById("eyeIcon");
 
-        const fakeEmail = phone + "@pranayu.com";
 
-        const { data, error } = await supabaseClient.auth.signInWithPassword({
-            email: fakeEmail,
-            password: password,
-        });
+toggle.onclick = function()
+{
 
-        if (error) {
-            alert("Login Failed: " + error.message);
-        } else {
-            alert("Login Successful!");
-            window.location.href = "home.html";
-        }
-    });
+if(pwd.type === "password")
+{
+pwd.type = "text";
+icon.classList.replace("fa-eye","fa-eye-slash");
+}
+else
+{
+pwd.type = "password";
+icon.classList.replace("fa-eye-slash","fa-eye");
+}
+
+}
+
 </script>
+
+
+
+<!-- LOCAL STORAGE SIGNUP -->
+<script>
+
+document
+.getElementById("createForm")
+.addEventListener("submit", function(e)
+{
+
+e.preventDefault();
+
+
+let name =
+document.getElementById("fullname").value.trim();
+
+let phone =
+document.getElementById("phone").value.trim();
+
+let age =
+document.getElementById("age").value.trim();
+
+let password =
+document.getElementById("password").value.trim();
+
+
+
+/* validate phone */
+if(!/^\d{10}$/.test(phone))
+{
+alert("Enter valid 10-digit mobile number");
+return;
+}
+
+
+
+/* get existing users */
+let users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+
+
+/* check duplicate */
+let exists =
+users.some(user => user.phone === phone);
+
+
+if(exists)
+{
+alert("Account already exists. Please login.");
+return;
+}
+
+
+
+/* create new user */
+let newUser =
+{
+name: name,
+phone: phone,
+age: age,
+password: password,
+role: "user"
+};
+
+
+
+/* save */
+users.push(newUser);
+
+localStorage.setItem(
+"users",
+JSON.stringify(users)
+);
+
+
+
+alert("Account created successfully ✅");
+
+
+/* redirect to login */
+window.location.href = "login.html";
+
+
+});
+
+</script>
+
+
 </body>
 </html>
-
 
 
 
