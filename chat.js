@@ -208,25 +208,29 @@ if (!found) {
 // SHOW REMEDY
 // ========================
 
-function showRemedy(symptomName){
+function showRemedy(symptomKey){
 
-    remedies.forEach(item => {
+    const lang = localStorage.getItem("lang") || "en";
 
-        if(item.symptom.toLowerCase().includes(symptomName.toLowerCase())){
+    const item = remedies.find(r => r.key === symptomKey);
 
-            addMessage(
-                translations[currentLanguage].remedyFor + " " + item.symptom + ":",
-                "bot"
-            );
+    if (!item) {
+        addMessage("No remedy found.", "bot");
+        return;
+    }
 
-            addMessage(
-                "🌿 " + translations[currentLanguage].remedy + ": " + item.remedy +
-                "\n\n🩺 " + translations[currentLanguage].howWorks + ": " + item.process,
-                "bot"
-            );
-        }
-    });
+    addMessage(
+        "Here are remedies for " + item.symptom[lang] + ":",
+        "bot"
+    );
+
+    addMessage(
+        "🌿 " + item.remedy[lang] +
+        "\n\n🩺 " + item.process[lang],
+        "bot"
+    );
 }
+
 
 // ========================
 // FOLLOW UP
