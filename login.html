@@ -13,7 +13,6 @@
 
 <body>
 
-<<<<<<< HEAD
     <!-- Navbar -->
     <nav class="navbar">
 
@@ -51,19 +50,9 @@
             <button type="submit">Login</button>
             <br><br>
         </form>
-=======
-<nav class="navbar">
-  <div class="logo">
-    <img src="leafLog.png" alt="PranAyu logo"/>
-    <span>PranAyu</span>
-  </div>
-</nav>
-
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
 
 <div class="create-container">
 
-<<<<<<< HEAD
         <button onclick="window.location.href='signup.html'" type="button">
             Create Account
         </button>
@@ -77,13 +66,9 @@ function goBack() {
   }
 }
 </script>
-=======
-<h2>Create Account</h2>
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
 
 <form id="createForm">
 
-<<<<<<< HEAD
 
 <!-- Supabase Login Script -->
 <script>
@@ -91,73 +76,10 @@ function goBack() {
         "https://veslqhmsyhlhmouojpnj.supabase.co",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2xxaG1zeWhsaG1vdW9qcG5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwODUyNDUsImV4cCI6MjA4NzY2MTI0NX0.CUCPoPjUTYRFagm76uW9j8GdcTrVHnyTDgif4F-FmY8"
     );
-=======
-<label>Full name</label><br>
-<input
-type="text"
-id="fullname"
-placeholder="Enter your name"
-required>
-<br><br>
-
-
-<label>Mobile number</label><br>
-<input
-type="tel"
-id="phone"
-placeholder="Enter Mobile Number"
-maxlength="10"
-pattern="[0-9]{10}"
-oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-required>
-<br><br>
-
-
-<label>Age</label><br>
-<input
-type="number"
-id="age"
-placeholder="Enter your age"
-required>
-<br><br>
-
-
-<label>Password</label><br>
-
-<div class="password-wrapper">
-
-<input
-type="password"
-id="password"
-placeholder="Enter password"
-required>
-
-<span id="togglePassword">
-<i id="eyeIcon" class="fa-solid fa-eye"></i>
-</span>
-
-</div>
-
-<br><br>
-
-<button type="submit">
-Create Account
-</button>
-
-</form>
-
-</div>
-
-
-
-<!-- PASSWORD SHOW / HIDE -->
-<script>
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
 
 const toggle =
 document.getElementById("togglePassword");
 
-<<<<<<< HEAD
         const phone = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
@@ -172,133 +94,7 @@ document.getElementById("togglePassword");
             email: fakeEmail,
             password: password,
         });
-=======
-const pwd =
-document.getElementById("password");
-
-const icon =
-document.getElementById("eyeIcon");
-
-
-toggle.onclick = function()
-{
-
-if(pwd.type === "password")
-{
-pwd.type = "text";
-icon.classList.replace("fa-eye","fa-eye-slash");
-}
-else
-{
-pwd.type = "password";
-icon.classList.replace("fa-eye-slash","fa-eye");
-}
-
-}
-
-</script>
-
-
-
-<!-- LOCAL STORAGE SIGNUP -->
-<script>
-
-document
-.getElementById("createForm")
-.addEventListener("submit", function(e)
-{
-
-e.preventDefault();
-
-
-let name =
-document.getElementById("fullname").value.trim();
-
-let phone =
-document.getElementById("phone").value.trim();
-
-let age =
-document.getElementById("age").value.trim();
-
-let password =
-document.getElementById("password").value.trim();
-
-
-
-/* validate phone */
-if(!/^\d{10}$/.test(phone))
-{
-alert("Enter valid 10-digit mobile number");
-return;
-}
-
-
-
-/* get existing users */
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
-
-
-
-/* check duplicate */
-let exists =
-users.some(user => user.phone === phone);
-
-
-if(exists)
-{
-alert("Account already exists. Please login.");
-return;
-}
-
-
-
-/* create new user */
-let newUser =
-{
-name: name,
-phone: phone,
-age: age,
-password: password,
-role: "user"
-};
-
-
-
-/* save */
-users.push(newUser);
-
-localStorage.setItem(
-"users",
-JSON.stringify(users)
-);
-
-
-
-alert("Account created successfully ✅");
-
-
-/* redirect to login */
-window.location.href = "login.html";
-
-
-});
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9
 
 </script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
-
-
-
-
-
-
-
-
-
-
->>>>>>> 1c23ff08711a36e3b91c55e404aeee8677850de9

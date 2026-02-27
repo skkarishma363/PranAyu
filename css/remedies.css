@@ -1,38 +1,79 @@
-style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Georgia', serif;
-        }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+}
 
-        body{
-            background-color:#e1f8dc; /* pastel green */
-            min-height:100vh;
-        }
+body {
+  min-height: 100vh;          /* not height:100vh */
+  background-color: #e1f8dc;
+  font-family: 'Georgia', serif;
 
-        /* ===== NAVBAR / LOGO ===== */
-        .navbar{
-            padding:30px 60px;
-        }
+  display: block;             /* remove flex centering */
+  overflow-y: auto;           /* allow scroll */
+  padding: 0px 0 60px;       /* space top & bottom */
+}
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
 
-        .logo{
-            display:flex;
-            align-items:center;
-            gap:12px;
-        }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* THIS pushes them to opposite ends */
 
-        .logo img{
-            height:48px;
-            width:auto;
-        }
+  padding: 14px 60px;
+  background-color: #e1f8dc;
+  z-index: 1000;
+}
 
-        .logo span{
-            font-size:34px;
-            font-weight:1000;
-            color:#2f6f3e;
-            letter-spacing:1px;
-        }
+/* Back button (arrow only, no border) */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2f6f3e;
+
+  transition: 0.2s ease;
+}
+
+.back-btn i {
+  font-size: 16px;
+}
+
+.back-btn:hover {
+  color: #1f4d2a;
+  transform: translateX(-2px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  height: 48px;
+}
+
+.logo span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 1000;
+  color: #2f6f3e;
+  letter-spacing: 1px;
+}
+
+
 
         /* ===== PAGE TITLE ===== */
         h1{
