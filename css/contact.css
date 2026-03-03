@@ -6,13 +6,13 @@
 }
 
 body {
-  min-height: 100vh;          /* not height:100vh */
+  min-height: 100vh;          
   background-color: #e1f8dc;
   font-family: 'Georgia', serif;
 
-  display: block;             /* remove flex centering */
-  overflow-y: auto;           /* allow scroll */
-  padding: 0px 0 60px;       /* space top & bottom */
+  display: block;             
+  overflow-y: auto;           
+  padding: 0px 0 60px;       
 }
 .navbar {
   position: sticky;
@@ -21,14 +21,13 @@ body {
 
   display: flex;
   align-items: center;
-  justify-content: space-between;   /* THIS pushes them to opposite ends */
-
+  justify-content: space-between;   
   padding: 14px 60px;
   background-color: #e1f8dc;
   z-index: 1000;
 }
 
-/* Back button (arrow only, no border) */
+
 .back-btn {
   display: flex;
   align-items: center;
@@ -74,17 +73,17 @@ body {
 }
 
 
-/* ✅ page wrapper to center contact section */
+
 .contact-section{
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 15px 10px 60px;  /* space bottom for scroll */
+  padding: 15px 10px 60px;  
   text-align: center;
   font-family: Arial, sans-serif;
 }
 
-/* Heading */
+
 .contact-section h2{
   font-family: 'Cormorant Garamond', serif;
   font-size: 38px;
@@ -93,7 +92,7 @@ body {
   margin-bottom: 25px;
 }
 
-/* Card */
+
 .contact-card{
   background-color: #b9d2b9;
   padding: 25px;
@@ -317,7 +316,7 @@ body {
   padding: 40px 10px 60px;
 }
 
-/* Contact box */
+
 .contact-card{
   background-color: #b9d2b9;
   padding: 40px;
@@ -327,7 +326,7 @@ body {
   text-align: center;
 }
 
-/* New heading inside box */
+
 .card-title{
   font-family: 'Cormorant Garamond', serif;
   font-size: 42px;
