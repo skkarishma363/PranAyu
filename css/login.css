@@ -6,13 +6,13 @@
 }
 
 body {
-  min-height: 100vh;          /* not height:100vh */
+  min-height: 100vh;          
   background-color: #e1f8dc;
   font-family: 'Georgia', serif;
 
-  display: block;             /* remove flex centering */
-  overflow-y: auto;           /* allow scroll */
-  padding: 0px 0 60px;       /* space top & bottom */
+  display: block;             
+  overflow-y: auto;           
+  padding: 0px 0 60px;       
 }
 .navbar {
   position: sticky;
@@ -21,14 +21,12 @@ body {
 
   display: flex;
   align-items: center;
-  justify-content: space-between;   /* THIS pushes them to opposite ends */
-
+  justify-content: space-between;   
   padding: 14px 60px;
   background-color: #e1f8dc;
   z-index: 1000;
 }
 
-/* Back button (arrow only, no border) */
 .back-btn {
   display: flex;
   align-items: center;
@@ -79,7 +77,6 @@ body {
   margin: 30px auto 0;
 }
 
-/* Heading */
 .login-container h2 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 38px;
@@ -88,7 +85,6 @@ body {
     margin-bottom: 35px;
 }
 
-/* Labels */
 .login-container label {
     display: block;
     text-align: left;
@@ -97,7 +93,6 @@ body {
     font-size: 15px;
 }
 
-/* Inputs */
 .login-container input {
     width: 100%;
     padding: 15px;
@@ -109,7 +104,6 @@ body {
     color: #2f5e3a;
     transition: 0.2s ease;
 
-    /* ✅ MAIN FIX: space between mobile and password */
     margin-bottom: 18px;
 }
 
@@ -117,7 +111,6 @@ body {
     background-color: #d4dfd2;
 }
 
-/* Login Button */
 .login-container button[type="submit"] {
     width: 100%;
     padding: 12px;
@@ -135,7 +128,6 @@ body {
     background-color: #245730;
 }
 
-/* ✅ NEW line text */
 .account-text {
     font-size: 14px;
     color: #2f5e3a;
@@ -155,7 +147,6 @@ body {
     text-decoration: underline;
 }
 
-/* Create Button */
 .login-container button[type="button"] {
     padding: 8px 25px;
     border-radius: 20px;
