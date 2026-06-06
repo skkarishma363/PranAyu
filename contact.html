@@ -5,19 +5,20 @@
   <title>Nearby Help</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar">
 
-  <!-- Back button LEFT -->
+  
   <button class="back-btn" onclick="goBack()">
     <i class="fa-solid fa-arrow-left"></i>
     <span>Back</span>
   </button>
 
-  <!-- Logo RIGHT -->
+ 
   <div class="logo">
     <img src="leafLog.png" alt="PranAyu logo" />
     <span>PranAyu</span>
@@ -50,22 +51,22 @@
       <button id="btnLocation" class="btn" disabled>📍 Use My Location</button>
     </div>
 
-    <!-- ✅ keep status inside box -->
+    
     <div id="status" class="status hidden"></div>
 
-    <!-- ✅ keep location box inside box -->
+    
     <div class="location-box" id="locationBox" style="display:none;">
       <div class="loc-item"><span>Latitude:</span> <b id="lat">-</b></div>
       <div class="loc-item"><span>Longitude:</span> <b id="lng">-</b></div>
     </div>
 
-    <!-- ✅ keep results inside box -->
+    
     <div class="results hidden" id="resultsSection">
       <h3 id="resultsTitle">Results</h3>
       <div id="resultsList" class="results-list"></div>
     </div>
 
-    <!-- ✅ keep footer inside box -->
+    
     <div class="contact-footer">
       <p>Need help? Contact us:</p>
       <a href="mailto:support@pranayu.in" class="contact-email">📧 support@pranayu.in</a>
@@ -83,11 +84,10 @@ function goBack() {
 }
 </script>
 
-  <!-- ✅ JS changes only (replace your current related parts with this) -->
+  
 
 <script>
-  // ❌ Remove "allowed pincode only" restriction
-  // ✅ Only rule now: pincode must be exactly 6 digits (numbers only)
+  
 
   const PIN_TO_LOCATION = {
     "534101": "Tadepalligudem",
@@ -145,7 +145,7 @@ function goBack() {
     ]
   };
 
-  // Elements
+  
   const statusEl = document.getElementById("status");
   const pincodeInput = document.getElementById("pincodeInput");
   const btnSearch = document.getElementById("btnSearch");
@@ -174,11 +174,11 @@ function goBack() {
     return /^[1-9][0-9]{5}$/.test(pin);
   }
 
-  // ✅ Buttons are ALWAYS usable (not disabled)
+  
   btnSearch.disabled = false;
   btnLocation.disabled = false;
 
-  // ✅ Pincode input: numbers only, max 6
+  
   pincodeInput.addEventListener("input", () => {
     pincodeInput.value = pincodeInput.value.replace(/\D/g, "").slice(0, 6);
     hideStatus();
@@ -217,7 +217,7 @@ function goBack() {
     });
   }
 
-  // ✅ Search button: only checks 6-digit validity
+  
   btnSearch.addEventListener("click", () => {
     hideStatus();
     locationBox.style.display = "none";
@@ -231,7 +231,7 @@ function goBack() {
     renderResults(pin);
   });
 
-  // ✅ Location button: only checks 6-digit validity then asks GPS
+  
   btnLocation.addEventListener("click", () => {
     hideStatus();
     locationBox.style.display = "none";
@@ -263,11 +263,11 @@ function goBack() {
       { enableHighAccuracy: true, timeout: 10000 }
     );
   });
-  // ✅ Press Enter after typing pincode -> automatically trigger Search
+  
 pincodeInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
-    e.preventDefault();      // Prevent form refresh (if inside form)
-    btnSearch.click();       // Trigger search button
+    e.preventDefault();      
+    btnSearch.click();       
   }
 });
 </script>

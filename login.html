@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="css/login.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap"
 rel="stylesheet">
 </head>
@@ -14,10 +14,15 @@ rel="stylesheet">
 <body>
 
 <nav class="navbar">
-<div class="logo">
-<img src="leafLog.png" alt="PranAyu logo">
-<span>PranAyu</span>
-</div>
+  <div class="logo">
+    <img src="leafLog.png" alt="PranAyu logo" />
+    <span>PranAyu</span>
+  </div>
+
+  <button class="back-btn" onclick="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Back</span>
+  </button>
 </nav>
 
 <div class="login-container">
@@ -36,11 +41,10 @@ required
 />
 
 <label>Password</label>
-<input
-type="password"
-id="password"
-required
-/>
+<div class="password-box">
+    <input type="password" id="password" placeholder="Enter Password">
+    <span class="eye" id="eyeIcon" onclick="togglePassword()">🙈</span>
+</div>
 
 <p class="forgot-text">
 <a href="#">Forgot password?</a>
@@ -61,11 +65,30 @@ Create Account
 </div>
 
 <!-- ================= JAVASCRIPT ================= -->
+<script>
+  function goBack() {
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = "home.html";
+  }
+</script>
+<script>
+function togglePassword() {
+    const password = document.getElementById("password");
+    const eye = document.getElementById("eyeIcon");
 
+    if (password.type === "password") {
+        password.type = "text";   // show password
+        eye.innerHTML = "👁";     // open eye
+    } else {
+        password.type = "password"; // hide password (dots)
+        eye.innerHTML = "🙈";       // closed eye
+    }
+}
+</script>
 <script>
 
 const form = document.getElementById("loginForm");
-
+fetch("http://localhost:5000/login")
 form.addEventListener("submit", async (e) => {
 
 e.preventDefault();

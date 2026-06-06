@@ -49,9 +49,9 @@ required />
 </select>
 
 <label>Password</label>
-<div class="password-wrapper">
-<input type="password" id="password" required />
-<i id="togglePassword" class="fa-solid fa-eye-slash"></i>
+<div class="password-box">
+    <input type="password" id="password" placeholder="Enter Password">
+    <span class="eye" id="eyeIcon" onclick="togglePassword()">🙈</span>
 </div>
 
 <br>
@@ -68,20 +68,22 @@ required />
 const form = document.getElementById("createForm");
 const toggle = document.getElementById("togglePassword");
 const passwordInput = document.getElementById("password");
-
+fetch("http://localhost:5000/signup")
 /* ================= PASSWORD TOGGLE ================= */
 
-toggle.addEventListener("click", () => {
 
-if (passwordInput.type === "password") {
-passwordInput.type = "text";
-toggle.classList.replace("fa-eye-slash", "fa-eye");
-} else {
-passwordInput.type = "password";
-toggle.classList.replace("fa-eye", "fa-eye-slash");
+function togglePassword() {
+    const password = document.getElementById("password");
+    const eye = document.getElementById("eyeIcon");
+
+    if (password.type === "password") {
+        password.type = "text";   // show password
+        eye.innerHTML = "👁";     // open eye
+    } else {
+        password.type = "password"; // hide password (dots)
+        eye.innerHTML = "🙈";       // closed eye
+    }
 }
-
-});
 
 /* ================= FORM SUBMIT ================= */
 

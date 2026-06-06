@@ -1,10 +1,48 @@
-style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Georgia', serif;
-        }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+}
+
+body {
+  min-height: 100vh;          /* not height:100vh */
+  background-color: #e1f8dc;
+  font-family: 'Georgia', serif;
+
+  display: block;             /* remove flex centering */
+  overflow-y: auto;           /* allow scroll */
+  padding: 0px 0 60px;       /* space top & bottom */
+}
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;              /* THIS IS IMPORTANT */
+  align-items: center;        /* vertical center */
+  padding: 20px 60px;
+  background-color: #e1f8dc;
+  z-index: 1000;
+  gap: 18px;                  /* space between arrow & logo */
+}
+
+/* Back button (arrow only, no border) */
+.back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.back-btn i {
+  font-size: 22px;
+  color: #2f6f3e;
+  transition: 0.2s ease;
+}
+
+.back-btn:hover i {
+  transform: translateX(-4px);
+  color: #1f4d2a;
+}
 
         body{
             background-color:#e1f8dc; /* pastel green */
