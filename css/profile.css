@@ -6,13 +6,13 @@
 }
 
 body {
-  min-height: 100vh;          /* not height:100vh */
+  min-height: 100vh;          
   background-color: #e1f8dc;
   font-family: 'Georgia', serif;
 
-  display: block;             /* remove flex centering */
-  overflow-y: auto;           /* allow scroll */
-  padding: 0px 0 60px;       /* space top & bottom */
+  display: block;             
+  overflow-y: auto;           
+  padding: 0px 0 60px;       
 }
 .navbar {
   position: sticky;
@@ -25,7 +25,6 @@ body {
   gap: 18px;                  /* space between arrow & logo */
 }
 
-/* Back button (arrow only, no border) */
 .back-btn {
   background: none;
   border: none;
@@ -49,7 +48,6 @@ body {
   align-items: center;
   gap: 12px;
 }
-
 .logo img {
   height: 48px;
 }
@@ -64,7 +62,6 @@ body {
 
 
 
-/* Layout */
 .layout{
   width: 85%;
   margin: 10px auto 40px auto;
@@ -73,7 +70,6 @@ body {
   align-items:flex-start;
 }
 
-/* Sidebar */
 .sidebar{
   width: 280px;
   background:#a2d393;
@@ -170,7 +166,6 @@ body {
   margin: 10px 0 18px 0;
 }
 
-/* Cards */
 .cards{
   display:grid;
   grid-template-columns: repeat(2, minmax(220px, 1fr));
