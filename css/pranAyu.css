@@ -8,8 +8,8 @@ body {
 }
 .center-container {
     display: flex;
-    flex-direction: column;   /* one after another */
-    align-items: center;      /* horizontal center */
+    flex-direction: column;   
+    align-items: center;      
     text-align: center;
 }
 .center-container img {
@@ -73,7 +73,6 @@ body {
     margin: 0;
     padding: 0;
 }
-/* Navbar */
 .navbar {
     position: sticky;
     top: 0;
@@ -86,14 +85,12 @@ body {
     z-index: 1000;
 }
 
-/* Logo */
 .logo {
     font-size: 22px;
     font-weight: bold;
     color: #2e7d32;
 }
 
-/* Links */
 .nav-links {
     list-style: none;
     display: flex;

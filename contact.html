@@ -5,59 +5,83 @@
   <title>Nearby Help</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/contact.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="logo">
-            <img src="leafLog.png" alt="PranAyu logo">
-            <span>PranAyu</span>
-        </div>
-    </nav>
+
+  <!-- Back button LEFT -->
+  <button class="back-btn" onclick="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Back</span>
+  </button>
+
+  <!-- Logo RIGHT -->
+  <div class="logo">
+    <img src="leafLog.png" alt="PranAyu logo" />
+    <span>PranAyu</span>
+  </div>
+
+</nav>
   <section class="contact-section">
-    <h2>Nearby ASHA Workers & Doctors</h2>
+  <div class="contact-card">
 
-    <div class="contact-card">
-      <p class="subtext">
-        Enter your <b>pincode</b>  to view ASHA workers and doctors in your area.
-      </p>
+    <h2 class="card-title">Nearby ASHA Workers & Doctors</h2>
 
-      <div class="field">
-        <label for="pincodeInput">Pincode</label>
-        <input
-          id="pincodeInput"
-          type="tel"
-          inputmode="numeric"
-          placeholder="Enter pincode"
-          maxlength="6"
-          autocomplete="off"
-        />
-       
-      </div>
+    <p class="subtext">
+      Enter your <b>pincode</b> to view ASHA workers and doctors in your area.
+    </p>
 
-      <div class="actions">
-        <button id="btnSearch" class="btn primary" disabled>🔎 Search</button>
-        <button id="btnLocation" class="btn" disabled>📍 Use My Location</button>
-      </div>
-
-      <div id="status" class="status hidden"></div>
-
-      <div class="location-box" id="locationBox" style="display:none;">
-        <div class="loc-item"><span>Latitude:</span> <b id="lat">-</b></div>
-        <div class="loc-item"><span>Longitude:</span> <b id="lng">-</b></div>
-      </div>
-
-      <div class="results hidden" id="resultsSection">
-        <h3 id="resultsTitle">Results</h3>
-        <div id="resultsList" class="results-list"></div>
-      </div>
-
-      <div class="contact-footer">
-        <p>Need help? Contact us:</p>
-        <a href="mailto:support@pranayu.in" class="contact-email">📧 support@pranayu.in</a>
-      </div>
+    <div class="field">
+      <label for="pincodeInput">Pincode</label>
+      <input
+        id="pincodeInput"
+        type="tel"
+        inputmode="numeric"
+        placeholder="Enter pincode"
+        maxlength="6"
+        autocomplete="off"
+      />
     </div>
-  </section>
+
+    <div class="actions">
+      <button id="btnSearch" class="btn primary" disabled>🔎 Search</button>
+      <button id="btnLocation" class="btn" disabled>📍 Use My Location</button>
+    </div>
+
+    <!-- ✅ keep status inside box -->
+    <div id="status" class="status hidden"></div>
+
+    <!-- ✅ keep location box inside box -->
+    <div class="location-box" id="locationBox" style="display:none;">
+      <div class="loc-item"><span>Latitude:</span> <b id="lat">-</b></div>
+      <div class="loc-item"><span>Longitude:</span> <b id="lng">-</b></div>
+    </div>
+
+    <!-- ✅ keep results inside box -->
+    <div class="results hidden" id="resultsSection">
+      <h3 id="resultsTitle">Results</h3>
+      <div id="resultsList" class="results-list"></div>
+    </div>
+
+    <!-- ✅ keep footer inside box -->
+    <div class="contact-footer">
+      <p>Need help? Contact us:</p>
+      <a href="mailto:support@pranayu.in" class="contact-email">📧 support@pranayu.in</a>
+    </div>
+
+  </div>
+</section>
+<script>
+function goBack() {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = "home.html";
+  }
+}
+</script>
 
   <!-- ✅ JS changes only (replace your current related parts with this) -->
 

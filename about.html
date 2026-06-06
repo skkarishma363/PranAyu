@@ -1,63 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>About - PranAyu</title>
-    <link rel="stylesheet" href="css/about.css">
-       
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - PranAyu</title>
+
+  <link rel="stylesheet" href="css/about.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
-    <!-- Logo -->
-    <nav class="navbar">
-    <div class="brand">
-        <img src="leafLog.png" width="60">
-        <h1>PranAyu</h1>
-    </div>
-    </nav>
+  <!-- Navbar (same as login page) -->
+  <nav class="navbar">
 
+  <!-- Back button LEFT -->
+  <button class="back-btn" onclick="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Back</span>
+  </button>
 
-    <!-- About Section -->
+  <!-- Logo RIGHT -->
+  <div class="logo">
+    <img src="leafLog.png" alt="PranAyu logo" />
+    <span>PranAyu</span>
+  </div>
+
+</nav>
+
+  <!-- Page content -->
+  <main class="page">
     <div class="about-container">
-        <h2>About Us</h2>
 
-        <p>
-            PranAyu is a smart wellness assistant designed to provide 
-            safe and natural home remedies based on user symptoms.
-        </p>
+      <h2>About Us</h2>
 
-        <p>
-            Our goal is to make healthcare simple, accessible, and 
-            reliable — especially for rural communities.
-        </p>
+      <p>PranAyu is a smart wellness assistant designed to provide safe and natural home remedies based on user symptoms.</p>
+      <p>Our goal is to make healthcare simple, accessible, and reliable — especially for rural communities.</p>
+      <p>With intelligent guidance and a user-friendly interface, PranAyu helps you take better care of your health naturally.</p>
 
-        <p>
-            With intelligent guidance and a user-friendly interface, 
-            PranAyu helps you take better care of your health naturally.
-        </p>
-        <h3 class="about-subtitle">Our Vision</h3>
-            <p>
-            To make natural healthcare accessible, affordable, and trustworthy for everyone.
-            </p>
-        <div class="feature-box">
-    <div class="feature">
-        <h4>🌱 Natural Remedies</h4>
-        <p>Safe and gentle home-based wellness suggestions.</p>
+      <h3 class="about-subtitle">Our Vision</h3>
+      <p>To make natural healthcare accessible, affordable, and trustworthy for everyone.</p>
+
+      <div class="feature-box">
+        <div class="feature">
+          <h4>🌱 Natural Remedies</h4>
+          <p>Safe and gentle home-based wellness suggestions.</p>
+        </div>
+
+        <div class="feature">
+          <h4>🤖 Smart Assistance</h4>
+          <p>Symptom-based intelligent guidance.</p>
+        </div>
+
+        <div class="feature">
+          <h4>💚 Easy to Use</h4>
+          <p>Simple interface designed for everyone.</p>
+        </div>
+      </div>
+
     </div>
-
-    <div class="feature">
-        <h4>🤖 Smart Assistance</h4>
-        <p>Symptom-based intelligent guidance.</p>
-    </div>
-
-    <div class="feature">
-        <h4>💚 Easy to Use</h4>
-        <p>Simple interface designed for everyone.</p>
-    </div>
-</div>
-    </div>
-    
-
-
+    <script>
+function goBack() {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = "home.html";
+  }
+}
+</script>
+  </main>
 </body>
 </html>

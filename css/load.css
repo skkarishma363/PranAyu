@@ -1,14 +1,12 @@
-/* Center the loader */
 body {
   margin: 0;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0b0614; /* dark premium background */
+  background: #0b0614; 
 }
 
-/* Loader */
 .loader {
   width: 90px;
   height: 24px;
@@ -24,7 +22,7 @@ body {
   border-radius: 6px;
 }
 
-/* Moving element */
+
 .loader::before {
   content: "";
   width: 20px;
@@ -36,7 +34,6 @@ body {
     l5-2  3s        infinite linear;
 }
 
-/* Animations */
 @keyframes l5-1 { 
   0% {
     clip-path: polygon(

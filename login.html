@@ -1,101 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Account Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Account Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/login.css">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap"
+rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="leafLog.png" alt="PranAyu logo">
-            <span>PranAyu</span>
-        </div>
-    </nav>
+<nav class="navbar">
+<div class="logo">
+<img src="leafLog.png" alt="PranAyu logo">
+<span>PranAyu</span>
+</div>
+</nav>
 
-    <!-- Login Container -->
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <label for="username">Mobile number</label><br />
-      <input
-        type="tel"
-        id="username"
-        name="username"
-        placeholder="Enter your Mobile Number"
-        pattern="[0-9]{10}"
-        maxlength="10"
-        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
-        required
-      />
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" placeholder="Enter Password" required><br><br>
-            <button type="submit">Login</button>
-            <br><br>
-        </form>
+<div class="login-container">
+<h2>Login</h2>
 
-        <br><br>
+<form id="loginForm">
 
-        <button onclick="window.location.href='signup.html'" type="button">
-            Create Account
-        </button>
-    </div>
+<label>Mobile Number</label>
+<input
+type="tel"
+id="phone"
+pattern="[0-9]{10}"
+maxlength="10"
+oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+required
+/>
 
-     <!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<label>Password</label>
+<input
+type="password"
+id="password"
+required
+/>
 
-<!-- Supabase Login Script -->
+<p class="forgot-text">
+<a href="#">Forgot password?</a>
+</p>
+
+<button type="submit">Login</button>
+
+<p class="account-text">
+Don’t have an account?
+</p>
+
+</form>
+
+<button onclick="window.location.href='signup.html'" type="button">
+Create Account
+</button>
+
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+
 <script>
-    const supabaseClient = window.supabase.createClient(
-        "https://veslqhmsyhlhmouojpnj.supabase.co",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2xxaG1zeWhsaG1vdW9qcG5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwODUyNDUsImV4cCI6MjA4NzY2MTI0NX0.CUCPoPjUTYRFagm76uW9j8GdcTrVHnyTDgif4F-FmY8"
-    );
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
+const form = document.getElementById("loginForm");
 
-        const phone = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+form.addEventListener("submit", async (e) => {
 
-        if (!phone || !password) {
-            alert("Please enter mobile number and password");
-            return;
-        }
+e.preventDefault();
 
-        const fakeEmail = phone + "@pranayu.com";
+const phone = document.getElementById("phone").value.trim();
+const password = document.getElementById("password").value;
 
-        const { data, error } = await supabaseClient.auth.signInWithPassword({
-            email: fakeEmail,
-            password: password,
-        });
+/* Validation */
 
-        if (error) {
-            alert("Login Failed: " + error.message);
-        } else {
-            alert("Login Successful!");
-            window.location.href = "home.html";
-        }
-    });
+if (!/^\d{10}$/.test(phone)) {
+alert("Mobile number must be exactly 10 digits.");
+return;
+}
+
+try {
+
+/* ================= CALL PYTHON BACKEND ================= */
+
+const response = await fetch("http://localhost:5000/login", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+phone: phone,
+password: password
+})
+});
+
+const data = await response.json();
+
+if (response.ok) {
+
+alert("Login Successful ✅");
+
+/* Role Based Redirect */
+
+if (data.role === "asha_worker") {
+window.location.href = "asha_dashboard.html";
+}
+else {
+window.location.href = "home.html";
+}
+
+} else {
+alert("Login Failed ❌ " + data.error);
+}
+
+} catch (err) {
+alert("Server Error ❌ " + err.message);
+}
+
+});
+
 </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

@@ -6,18 +6,28 @@
   <title>PranAyu - Nearest Pharmacies</title>
 
   <!-- Link CSS -->
-  <link rel="stylesheet" href="css/pharmacies.css">
+   <link rel="stylesheet" href="css/pharmacies.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- ===== LOGO NAVBAR ===== -->
   <nav class="navbar">
-    <div class="logo">
-      <img src="leafLog.png" alt="PranAyu Logo">
-      <span>PranAyu</span>
-    </div>
-  </nav>
+
+  <!-- Back button LEFT -->
+  <button class="back-btn" onclick="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Back</span>
+  </button>
+
+  <!-- Logo RIGHT -->
+  <div class="logo">
+    <img src="leafLog.png" alt="PranAyu logo" />
+    <span>PranAyu</span>
+  </div>
+
+</nav>
 
   <h1>💊 Nearest Pharmacies - Maredumilli</h1>
 
@@ -28,6 +38,15 @@
   </div>
 
   <div class="container" id="pharmacyCards"></div>
+  <script>
+function goBack() {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = "home.html";
+  }
+}
+</script>
 
   <script>
     const pharmacies = [
