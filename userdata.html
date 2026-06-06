@@ -11,16 +11,13 @@
 </head>
 
 <body>
-  <!-- Brand -->
   <nav class="navbar">
 
-  <!-- Back button LEFT -->
   <button class="back-btn" onclick="goBack()">
     <i class="fa-solid fa-arrow-left"></i>
     <span>Back</span>
   </button>
 
-  <!-- Logo RIGHT -->
   <div class="logo">
     <img src="leafLog.png" alt="PranAyu logo" />
     <span>PranAyu</span>
@@ -39,7 +36,6 @@
       </div>
 
       <form id="profileForm">
-        <!-- PERSONAL DETAILS -->
         <h3 class="section-title">Personal Details</h3>
 
         <div class="grid">
@@ -63,7 +59,6 @@
           </div>
         </div>
 
-        <!-- HEALTH DETAILS -->
         <h3 class="section-title">Health Details</h3>
 
         <div class="grid">
@@ -142,7 +137,6 @@ function goBack() {
         return;
       }
 
-      // Load existing profile data
       const { data, error } = await supabase
         .from("users")
         .select("name, phone, age, blood_group, allergies, conditions, emergency_contact, role")
@@ -150,7 +144,6 @@ function goBack() {
         .single();
 
       if (error) {
-        // If row not found, user can still fill and save
         console.log("Load profile:", error.message);
         return;
       }
@@ -195,7 +188,6 @@ function goBack() {
         return;
       }
 
-      // Upsert = insert if not exists, otherwise update
       const { error } = await supabase
         .from("users")
         .upsert(payload, { onConflict: "id" });

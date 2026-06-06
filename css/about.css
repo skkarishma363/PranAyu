@@ -17,42 +17,31 @@ body {
 .navbar {
   position: sticky;
   top: 0;
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;   /* THIS pushes them to opposite ends */
-
-  padding: 14px 60px;
+  display: flex;              /* THIS IS IMPORTANT */
+  align-items: center;        /* vertical center */
+  padding: 20px 60px;
   background-color: #e1f8dc;
   z-index: 1000;
+  gap: 18px;                  /* space between arrow & logo */
 }
 
 /* Back button (arrow only, no border) */
 .back-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
   background: none;
   border: none;
+  padding: 0;
   cursor: pointer;
-
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: #2f6f3e;
-
-  transition: 0.2s ease;
 }
 
 .back-btn i {
-  font-size: 16px;
+  font-size: 22px;
+  color: #2f6f3e;
+  transition: 0.2s ease;
 }
 
-.back-btn:hover {
+.back-btn:hover i {
+  transform: translateX(-4px);
   color: #1f4d2a;
-  transform: translateX(-2px);
 }
 
 .logo {

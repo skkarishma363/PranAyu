@@ -1,7 +1,7 @@
 // js/voice.js
 
 const micBtn = document.querySelector(".mic-btn");
-const input = document.querySelector(".search-input");
+const input = document.getElementById("user-input");
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
