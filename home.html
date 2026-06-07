@@ -87,6 +87,31 @@
     </button>
 
 </div>
+
+
+<div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+
+    <div class="chat-input-area">
+
+        <button class="mic-btn" onclick="startListening()" aria-label="Voice input">
+            <svg viewBox="0 0 24 24" class="mic-icon">
+                <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/>
+                <path d="M19 11a7 7 0 0 1-14 0"/>
+                <line x1="12" y1="18" x2="12" y2="22"/>
+            </svg>
+        </button>
+
+        <input type="text"
+               id="user-input"
+               data-i18n-placeholder="placeholderText"
+               placeholder="Describe your symptoms..." />
+
+        <button onclick="handleUserInput()" data-i18n="sendBtn">
+            Send
+        </button>
+
+    </div>
 </div>
 <button id="emergencyBtn" class="emergency-btn">
     🚨 Emergency
@@ -98,4 +123,5 @@
 <script src="js/chat.js"></script>
 
 </body>
+
 </html>
