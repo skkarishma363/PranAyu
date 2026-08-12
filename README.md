@@ -1,4 +1,5 @@
 # PranAyu
+https://pranayu.ai.studio/
 PranAyu 🌿
 
 PranAyu is a healthcare and wellness platform designed to provide users with simple home remedies, health guidance, medicine reminders, and support from ASHA workers. The application aims to improve healthcare accessibility, especially for rural and remote communities.
